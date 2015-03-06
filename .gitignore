@@ -3,7 +3,7 @@
 *.DS_Store
 
 #Visual Studio files
-*.[Oo]bj
+#*.[Oo]bj
 *.user
 *.aps
 *.pch
@@ -25,7 +25,7 @@
 *.opensdf
 *.unsuccessfulbuild
 ipch/
-[Oo]bj/
+#[Oo]bj/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/

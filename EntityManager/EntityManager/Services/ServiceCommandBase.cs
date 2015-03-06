@@ -8,11 +8,12 @@ using EntityManager.DatabaseContexts;
 
 namespace EntityManager.Services
 {
-    public class ServiceCommandBase : IServiceCommandBase
+    public class ServiceCommandBase : ServiceQueryBase, IServiceCommandBase
     {
        private readonly DbContextScopeFactory _dbContextScopeFactory;
 
-        public ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
+       public ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
+           : base(dbContextScopeFactory)
         {
             _dbContextScopeFactory = dbContextScopeFactory;
         }
@@ -25,29 +26,6 @@ namespace EntityManager.Services
                 dbContext.Set<T>().AddOrUpdate(input);
 
                 dbContext.SaveChanges();
-            }
-        }
-
-        public T GetEntity<T>(Guid id) where T : class
-        {
-            using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
-            {
-                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
-
-                var result = dbContext.Set<T>().Find(id);
-
-                return result;
-            }
-        }
-
-        public IEnumerable<T> GetAllEntities<T>() where T : class
-        {
-            using (var dbContextScope = _dbContextScopeFactory.Create())
-            {
-                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
-                var results = dbContext.Set<T>().ToList();
-
-                return results;
             }
         }
 

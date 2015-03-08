@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using EF.Implementation;
-using EntityManager.DatabaseContexts;
 using EntityManager.Models;
 using EntityManager.Services;
 
@@ -9,11 +7,16 @@ namespace EntityManager.Controllers
 {
     public class ClientsController : Controller
     {
-        //poor mans di
-        private readonly ClientQueryService _clientQueryService = new ClientQueryService(new DbContextScopeFactory());
-        private readonly ClientCommandService _clientCommandService = new ClientCommandService(new DbContextScopeFactory());
+        private readonly IClientQueryService _clientQueryService;
+        private readonly IClientCommandService _clientCommandService;
 
-        private EntityManagerDbContext db = new EntityManagerDbContext();
+        public ClientsController(
+            IClientQueryService clientQueryService, 
+            IClientCommandService clientCommandService)
+        {
+            _clientQueryService = clientQueryService;
+            _clientCommandService = clientCommandService;
+        }
 
         public ActionResult Index()
         {
@@ -92,15 +95,6 @@ namespace EntityManager.Controllers
             _clientCommandService.DeleteEntity<Client>(id);
 
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

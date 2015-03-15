@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Reflection;
-using EntityManager.Models;
+using EntityManager.Domain.CodeFirst;
 
 namespace EntityManager.DatabaseContexts
 {

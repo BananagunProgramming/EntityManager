@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using EntityManager.Models;
+using EntityManager.Domain.CodeFirst;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers

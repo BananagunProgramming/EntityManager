@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.Implementation", "EF.Implementation\EF.Implementation.csproj", "{998B2A50-6B31-4137-8143-FC62144B7AC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityManager.Domain", "EntityManager.Domain\EntityManager.Domain.csproj", "{59FE4607-C579-42EB-83CE-FE91AC9616A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{998B2A50-6B31-4137-8143-FC62144B7AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{998B2A50-6B31-4137-8143-FC62144B7AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{998B2A50-6B31-4137-8143-FC62144B7AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59FE4607-C579-42EB-83CE-FE91AC9616A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FE4607-C579-42EB-83CE-FE91AC9616A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FE4607-C579-42EB-83CE-FE91AC9616A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FE4607-C579-42EB-83CE-FE91AC9616A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

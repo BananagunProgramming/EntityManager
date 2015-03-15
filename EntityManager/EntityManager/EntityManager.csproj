@@ -198,7 +198,6 @@
     </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,6 +302,10 @@
     <ProjectReference Include="..\EF.Implementation\EF.Implementation.csproj">
       <Project>{998b2a50-6b31-4137-8143-fc62144b7ac4}</Project>
       <Name>EF.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityManager.Domain\EntityManager.Domain.csproj">
+      <Project>{59fe4607-c579-42eb-83ce-fe91ac9616a6}</Project>
+      <Name>EntityManager.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

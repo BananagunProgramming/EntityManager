@@ -1,4 +1,5 @@
 using System;
+using EntityManager.Domain.CodeFirst;
 using EntityManager.Models;
 
 namespace EntityManager.Migrations_EntityManagerDbContext

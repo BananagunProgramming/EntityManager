@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntityManager.Models
+namespace EntityManager.Domain.CodeFirst
 {
     public class Client
     {

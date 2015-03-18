@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using EF.Implementation;
-using EF.Implementation.Abstract;
 using EntityManager.Services;
 using Ninject;
 

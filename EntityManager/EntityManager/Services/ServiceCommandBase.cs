@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using System.Linq;
 using EF.Implementation;
 using EntityManager.Abstract;
+using EntityManager.Controllers;
 using EntityManager.DatabaseContexts;
+using log4net;
 
 namespace EntityManager.Services
 {
     public class ServiceCommandBase : ServiceQueryBase, IServiceCommandBase
     {
        private readonly DbContextScopeFactory _dbContextScopeFactory;
-
+        
        public ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
            : base(dbContextScopeFactory)
         {
@@ -26,6 +26,8 @@ namespace EntityManager.Services
                 dbContext.Set<T>().AddOrUpdate(input);
 
                 dbContext.SaveChanges();
+
+                //Logger.Info(String.Format("Entity type {0} updated", typeof(T)));
             }
         }
 

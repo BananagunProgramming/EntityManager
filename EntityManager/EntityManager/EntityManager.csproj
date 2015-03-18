@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -191,10 +194,38 @@
     <Compile Include="Migrations_AuthenticationContext\201503041701118_Initial.Designer.cs">
       <DependentUpon>201503041701118_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_AuthenticationContext\201503180017059_RemoveWebsiteErrorTable.cs" />
+    <Compile Include="Migrations_AuthenticationContext\201503180017059_RemoveWebsiteErrorTable.Designer.cs">
+      <DependentUpon>201503180017059_RemoveWebsiteErrorTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_AuthenticationContext\Configuration.cs" />
     <Compile Include="Migrations_EntityManagerDbContext\201503041647528_Initial.cs" />
     <Compile Include="Migrations_EntityManagerDbContext\201503041647528_Initial.Designer.cs">
       <DependentUpon>201503041647528_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503151932159_WebsiteErrors.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503151932159_WebsiteErrors.Designer.cs">
+      <DependentUpon>201503151932159_WebsiteErrors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503151943127_WebsiteErrorsAddFields1.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503151943127_WebsiteErrorsAddFields1.Designer.cs">
+      <DependentUpon>201503151943127_WebsiteErrorsAddFields1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503151958116_WebsiteErrorsAddFields2.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503151958116_WebsiteErrorsAddFields2.Designer.cs">
+      <DependentUpon>201503151958116_WebsiteErrorsAddFields2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503152017254_WebsiteErrorsAddFields21.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503152017254_WebsiteErrorsAddFields21.Designer.cs">
+      <DependentUpon>201503152017254_WebsiteErrorsAddFields21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503152019051_WebsiteErrorsAddFields22.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503152019051_WebsiteErrorsAddFields22.Designer.cs">
+      <DependentUpon>201503152019051_WebsiteErrorsAddFields22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.Designer.cs">
+      <DependentUpon>201503180021092_RemoveWebsiteErrorsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -243,14 +274,18 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -294,8 +329,29 @@
     <EmbeddedResource Include="Migrations_AuthenticationContext\201503041701118_Initial.resx">
       <DependentUpon>201503041701118_Initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_AuthenticationContext\201503180017059_RemoveWebsiteErrorTable.resx">
+      <DependentUpon>201503180017059_RemoveWebsiteErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503041647528_Initial.resx">
       <DependentUpon>201503041647528_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503151932159_WebsiteErrors.resx">
+      <DependentUpon>201503151932159_WebsiteErrors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503151943127_WebsiteErrorsAddFields1.resx">
+      <DependentUpon>201503151943127_WebsiteErrorsAddFields1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503151958116_WebsiteErrorsAddFields2.resx">
+      <DependentUpon>201503151958116_WebsiteErrorsAddFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503152017254_WebsiteErrorsAddFields21.resx">
+      <DependentUpon>201503152017254_WebsiteErrorsAddFields21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503152019051_WebsiteErrorsAddFields22.resx">
+      <DependentUpon>201503152019051_WebsiteErrorsAddFields22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.resx">
+      <DependentUpon>201503180021092_RemoveWebsiteErrorsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

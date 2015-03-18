@@ -4,12 +4,14 @@ using System.Linq;
 using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
+using log4net;
 
 namespace EntityManager.Services
 {
     public class ServiceQueryBase : IServiceQueryBase
     {
         private readonly DbContextScopeFactory _dbContextScopeFactory;
+        public static readonly ILog Logger = LogManager.GetLogger(typeof(ServiceQueryBase));
 
         public ServiceQueryBase(DbContextScopeFactory dbContextScopeFactory)
         {
@@ -23,6 +25,8 @@ namespace EntityManager.Services
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
                 var result = dbContext.Set<T>().Find(id);
+
+                Logger.Info("Got this entity");
 
                 return result;
             }

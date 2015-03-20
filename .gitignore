@@ -29,6 +29,7 @@ ipch/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
+Migrations*/
 Ankh.NoLoad
 
 #MonoDevelop

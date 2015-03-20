@@ -45,11 +45,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -326,6 +326,16 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EF.Implementation\EF.Implementation.csproj">
+      <Project>{998b2a50-6b31-4137-8143-fc62144b7ac4}</Project>
+      <Name>EF.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityManager.Domain\EntityManager.Domain.csproj">
+      <Project>{59fe4607-c579-42eb-83ce-fe91ac9616a6}</Project>
+      <Name>EntityManager.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Migrations_AuthenticationContext\201503041701118_Initial.resx">
       <DependentUpon>201503041701118_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -353,16 +363,6 @@
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.resx">
       <DependentUpon>201503180021092_RemoveWebsiteErrorsTable.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EF.Implementation\EF.Implementation.csproj">
-      <Project>{998b2a50-6b31-4137-8143-fc62144b7ac4}</Project>
-      <Name>EF.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EntityManager.Domain\EntityManager.Domain.csproj">
-      <Project>{59fe4607-c579-42eb-83ce-fe91ac9616a6}</Project>
-      <Name>EntityManager.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

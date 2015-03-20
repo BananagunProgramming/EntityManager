@@ -27,7 +27,7 @@ namespace EntityManager
 
             var logger = LogManager.GetLogger(typeof(MvcApplication));
 
-            logger.Error(ex);
+            logger.Error(ex.Message,ex);
         }
     }
 }

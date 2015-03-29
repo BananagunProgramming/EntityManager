@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Web.Mvc;
-using log4net;
+using EntityManager.Domain.Services;
 
 namespace EntityManager.Controllers
 {
     public class HomeController : Controller
     {
-        public static readonly ILog Logger = LogManager.GetLogger(typeof(HomeController));
+        public static readonly AzureWriter AuditLog = new AzureWriter();
         //todo should I implement a controller base for this logger? If I find one more reason yes
 
         public ActionResult Index()
         {
+            AuditLog.Audit("HomeController - Index");
+
             return View();
         }
 
         public ActionResult About()
         {
+            AuditLog.Audit("HomeController - About");
+
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -23,7 +27,9 @@ namespace EntityManager.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            AuditLog.Audit("HomeController - Contact");
+            throw new NotSupportedException("operation not supported");
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }

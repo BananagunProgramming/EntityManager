@@ -2,8 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using EntityManager.Domain.Services;
 using EntityManager.Infrastructure;
-using log4net;
+//using log4net;
 
 namespace EntityManager
 {
@@ -25,9 +26,12 @@ namespace EntityManager
         {
             var ex = Server.GetLastError().GetBaseException();
 
-            var logger = LogManager.GetLogger(typeof(MvcApplication));
+            var auditLog = new AzureWriter();
 
-            logger.Error(ex.Message,ex);
+            auditLog.Error(ex);
+            //var logger = LogManager.GetLogger(typeof(MvcApplication));
+
+            //logger.Error(ex.Message,ex);
         }
     }
 }

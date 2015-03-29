@@ -4,14 +4,14 @@ using System.Linq;
 using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
-using log4net;
+using EntityManager.Domain.Services;
 
 namespace EntityManager.Services
 {
     public class ServiceQueryBase : IServiceQueryBase
     {
         private readonly DbContextScopeFactory _dbContextScopeFactory;
-        public static readonly ILog Logger = LogManager.GetLogger(typeof(ServiceQueryBase));
+        public static readonly AzureWriter AuditLog = new AzureWriter();
 
         public ServiceQueryBase(DbContextScopeFactory dbContextScopeFactory)
         {
@@ -26,7 +26,7 @@ namespace EntityManager.Services
 
                 var result = dbContext.Set<T>().Find(id);
 
-                Logger.Info("Got this entity");
+                AuditLog.Audit(typeof(T).ToString());
 
                 return result;
             }

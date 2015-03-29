@@ -28,8 +28,6 @@ namespace EntityManager.Controllers
         public ActionResult Contact()
         {
             AuditLog.Audit("HomeController - Contact");
-            throw new NotSupportedException("operation not supported");
-            //ViewBag.Message = "Your contact page.";
 
             return View();
         }

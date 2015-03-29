@@ -4,7 +4,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using EntityManager.Domain.Services;
 using EntityManager.Infrastructure;
-//using log4net;
 
 namespace EntityManager
 {
@@ -12,8 +11,6 @@ namespace EntityManager
     {
         protected void Application_Start()
         {
-            log4net.Config.XmlConfigurator.Configure();
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -29,9 +26,6 @@ namespace EntityManager
             var auditLog = new AzureWriter();
 
             auditLog.Error(ex);
-            //var logger = LogManager.GetLogger(typeof(MvcApplication));
-
-            //logger.Error(ex.Message,ex);
         }
     }
 }

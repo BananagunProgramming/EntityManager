@@ -32,7 +32,6 @@ namespace EntityManager.Domain.Services
             var insertOperation = TableOperation.Insert(azureAppender);
 
             table.Execute(insertOperation);
-
         }
     }
 }

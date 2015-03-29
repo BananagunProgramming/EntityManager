@@ -2,9 +2,7 @@
 using System.Data.Entity.Migrations;
 using EF.Implementation;
 using EntityManager.Abstract;
-using EntityManager.Controllers;
 using EntityManager.DatabaseContexts;
-using log4net;
 
 namespace EntityManager.Services
 {

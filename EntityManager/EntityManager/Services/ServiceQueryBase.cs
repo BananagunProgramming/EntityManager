@@ -34,7 +34,7 @@ namespace EntityManager.Services
 
         public IEnumerable<T> GetAllEntities<T>() where T : class
         {
-            using (var dbContextScope = DbContextScopeFactory.Create())
+            using (var dbContextScope = DbContextScopeFactory.CreateReadOnly())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
                 var results = dbContext.Set<T>().ToList();

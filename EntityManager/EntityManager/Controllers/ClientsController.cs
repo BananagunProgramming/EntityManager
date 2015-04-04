@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
+using EntityManager.Domain.Services;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
     public class ClientsController : Controller
     {
+        public static readonly AzureWriter AuditLog = new AzureWriter();
+        //todo should I implement a controller base for this logger? If I find one more reason yes
+
         private readonly IClientQueryService _clientQueryService;
         private readonly IClientCommandService _clientCommandService;
 

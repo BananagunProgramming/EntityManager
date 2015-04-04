@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeFirst\Client.cs" />
+    <Compile Include="CodeFirst\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureWriter.cs" />
     <Compile Include="Services\AzureAudit.cs" />

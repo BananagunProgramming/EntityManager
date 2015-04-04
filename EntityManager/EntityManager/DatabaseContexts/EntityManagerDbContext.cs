@@ -7,6 +7,7 @@ namespace EntityManager.DatabaseContexts
     public class EntityManagerDbContext : DbContext
     {
         public DbSet<Client> Clients { get; set; }
+        public DbSet<State> States { get; set; }
 
         public EntityManagerDbContext() : base("DefaultConnection") { }
 

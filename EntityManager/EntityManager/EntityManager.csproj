@@ -254,6 +254,10 @@
     <Compile Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.Designer.cs">
       <DependentUpon>201503180021092_RemoveWebsiteErrorsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201503310018214_AddState.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201503310018214_AddState.Designer.cs">
+      <DependentUpon>201503310018214_AddState.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -390,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503180021092_RemoveWebsiteErrorsTable.resx">
       <DependentUpon>201503180021092_RemoveWebsiteErrorsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503310018214_AddState.resx">
+      <DependentUpon>201503310018214_AddState.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

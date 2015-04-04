@@ -20,6 +20,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.Implementation", "EF.Imp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityManager.Domain", "EntityManager.Domain\EntityManager.Domain.csproj", "{59FE4607-C579-42EB-83CE-FE91AC9616A6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7CB868B8-0188-4F80-9645-D9024A800A48}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

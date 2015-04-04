@@ -10,17 +10,17 @@ namespace EntityManager.Services
 {
     public class ServiceQueryBase : IServiceQueryBase
     {
-        private readonly DbContextScopeFactory _dbContextScopeFactory;
+        public DbContextScopeFactory DbContextScopeFactory;
         public static readonly AzureWriter AuditLog = new AzureWriter();
 
         public ServiceQueryBase(DbContextScopeFactory dbContextScopeFactory)
         {
-            _dbContextScopeFactory = dbContextScopeFactory;
+            DbContextScopeFactory = dbContextScopeFactory;
         }
 
         public T GetEntity<T>(Guid id) where T : class
         {
-            using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
+            using (var dbContextScope = DbContextScopeFactory.CreateReadOnly())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
@@ -34,7 +34,7 @@ namespace EntityManager.Services
 
         public IEnumerable<T> GetAllEntities<T>() where T : class
         {
-            using (var dbContextScope = _dbContextScopeFactory.Create())
+            using (var dbContextScope = DbContextScopeFactory.Create())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
                 var results = dbContext.Set<T>().ToList();

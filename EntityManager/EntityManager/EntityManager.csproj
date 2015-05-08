@@ -321,6 +321,7 @@
     <Content Include="ApplicationInsights.config" />
     <None Include="Properties\PublishProfiles\EntityManager666 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\EntityManager666.pubxml" />
+    <None Include="Properties\PublishProfiles\EntityManager666__EMStaging.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

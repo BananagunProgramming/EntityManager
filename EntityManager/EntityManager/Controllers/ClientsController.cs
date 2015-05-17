@@ -14,26 +14,23 @@ namespace EntityManager.Controllers
 
         private readonly IClientQueryService _clientQueryService;
         private readonly IClientCommandService _clientCommandService;
-        private readonly IUserService _userService;
-
+        
         public ClientsController(
             IClientQueryService clientQueryService, 
-            IClientCommandService clientCommandService, IUserService userService)
+            IClientCommandService clientCommandService)
         {
             _clientQueryService = clientQueryService;
             _clientCommandService = clientCommandService;
-            _userService = userService;
         }
 
         public ActionResult Index()
-        {
-            var eCode = _userService.GetEntityCode(User);
-
-            return View(_clientQueryService.GetAllEntities<Client>());
+        {//example of how controller should go through the associated service to get info so that I 
+            //can perform authorization and  return only that clients information, vertical striation.
+            return View(_clientQueryService.GetClientSpecificEntities());
         }
 
         public ActionResult Details(Guid id)
-        {
+        {//example of how not to do it. Going to service base class and using the generic methods directly. No chance for auth or vertical here.
             var client = _clientQueryService.GetEntity<Client>(id);
 
             if (client == null)

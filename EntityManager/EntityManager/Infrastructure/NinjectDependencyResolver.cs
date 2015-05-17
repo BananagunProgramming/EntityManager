@@ -23,6 +23,7 @@ namespace EntityManager.Infrastructure
 
             _kernel.Bind<IClientQueryService>().To<ClientQueryService>().WithConstructorArgument(dbContextScopeFactory);
             _kernel.Bind<IClientCommandService>().To<ClientCommandService>().WithConstructorArgument(dbContextScopeFactory);
+            _kernel.Bind<IUserService>().To<UserService>().WithConstructorArgument(dbContextScopeFactory);
         }
 
         public object GetService(Type serviceType)

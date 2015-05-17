@@ -257,6 +257,10 @@
     <Compile Include="Migrations_AuthenticationContext\201503180017059_RemoveWebsiteErrorTable.Designer.cs">
       <DependentUpon>201503180017059_RemoveWebsiteErrorTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_AuthenticationContext\201504192325287_AddEntityCode.cs" />
+    <Compile Include="Migrations_AuthenticationContext\201504192325287_AddEntityCode.Designer.cs">
+      <DependentUpon>201504192325287_AddEntityCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_AuthenticationContext\Configuration.cs" />
     <Compile Include="Migrations_EntityManagerDbContext\201503041647528_Initial.cs" />
     <Compile Include="Migrations_EntityManagerDbContext\201503041647528_Initial.Designer.cs">
@@ -299,6 +303,7 @@
     <Compile Include="Services\ClientQueryService.cs" />
     <Compile Include="Services\ServiceCommandBase.cs" />
     <Compile Include="Services\ServiceQueryBase.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_AuthenticationContext\201503180017059_RemoveWebsiteErrorTable.resx">
       <DependentUpon>201503180017059_RemoveWebsiteErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_AuthenticationContext\201504192325287_AddEntityCode.resx">
+      <DependentUpon>201504192325287_AddEntityCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201503041647528_Initial.resx">
       <DependentUpon>201503041647528_Initial.cs</DependentUpon>

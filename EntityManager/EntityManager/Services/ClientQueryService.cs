@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.Domain.CodeFirst;
@@ -25,7 +24,7 @@ namespace EntityManager.Services
         public IEnumerable<Client> GetClientSpecificEntities()
         {
             //do some sort of authorization here
-            var entityCode = _userService.EntityCode;
+            var entityCode = _userService.GetUserProperty("EntityCode");
 
             return GetAllEntities<Client>().Where(x => x.EntityCode == entityCode);
         }

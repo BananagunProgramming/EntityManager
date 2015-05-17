@@ -9,6 +9,7 @@ namespace EntityManager.Controllers
         public static readonly AzureWriter AuditLog = new AzureWriter();
         //todo should I implement a controller base for this logger? If I find one more reason yes
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             AuditLog.Audit("HomeController - Index");

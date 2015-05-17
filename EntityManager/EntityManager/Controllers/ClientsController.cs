@@ -6,6 +6,7 @@ using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
+    [Authorize(Roles = "canEdit")]
     public class ClientsController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();
@@ -13,17 +14,21 @@ namespace EntityManager.Controllers
 
         private readonly IClientQueryService _clientQueryService;
         private readonly IClientCommandService _clientCommandService;
+        private readonly IUserService _userService;
 
         public ClientsController(
             IClientQueryService clientQueryService, 
-            IClientCommandService clientCommandService)
+            IClientCommandService clientCommandService, IUserService userService)
         {
             _clientQueryService = clientQueryService;
             _clientCommandService = clientCommandService;
+            _userService = userService;
         }
 
         public ActionResult Index()
         {
+            var eCode = _userService.GetEntityCode(User);
+
             return View(_clientQueryService.GetAllEntities<Client>());
         }
 

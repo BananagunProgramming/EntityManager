@@ -1,7 +1,6 @@
 ﻿using System.Security.Principal;
 using System.Web;
 using EF.Implementation;
-using EntityManager.Domain.Services;
 using EntityManager.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

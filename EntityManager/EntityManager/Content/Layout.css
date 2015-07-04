@@ -1,0 +1,101 @@
+﻿html body.layout div#container a {
+    border-bottom: none !important;
+    border-bottom-width: 0 !important;
+}
+
+body {
+    padding-bottom: 20px;
+}
+
+#layout-body {
+    position: relative;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #B7F0AD;
+    color: #464B50;
+    padding: 20px;
+    text-align: center;
+}
+
+#masthead-hero {
+    bottom: 0;
+    display: block;
+    width: 100%;
+}
+
+#masthead {
+    position: relative;
+}
+
+#top {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: 148px;
+}
+#container {
+    border-radius: 0 !important;
+    max-width: 1280px;
+    margin: auto;
+    overflow: hidden;
+}
+
+#layout-contents {
+    margin-left: 22%;
+    background-color: whitesmoke;
+    min-height: 900px;
+    position: relative;
+    left: 0px;
+    padding: 10px 10px 0px 15px;
+    transition: left 150ms linear;
+}
+
+/*navigation*/
+#layout-nav-gutter {
+    color: black;
+    max-width: 280px;
+    position: absolute;
+    top: 0;
+    width: 22%;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    color: black;
+    border-bottom: 1px solid white;    
+}
+
+.layout #vertical-nav ul li {
+    border-top: 1px solid white;
+}
+
+.layout #vertical-nav ul li.active {
+    background: #000000;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.layout #vertical-nav ul li a {
+    border-left: 4px solid transparent;
+    border-top: none !important;
+    color: black !important;
+    display: block;
+    font-size: 1.2em;
+    overflow: auto;
+    padding: 16px 10px;
+    text-decoration: none;
+}
+
+/*//theme section*/
+.theme-body-background {
+    /*this is the whole page*/
+    background-color: #D2FF96;
+}
+
+.theme-primary-background {
+    /*this is inside my container, working space*/
+    background-color: #EDFF7A;
+}

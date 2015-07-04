@@ -3,22 +3,22 @@ using EntityManager.Domain.Services;
 
 namespace EntityManager.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();
         //todo should I implement a controller base for this logger? If I find one more reason yes
 
-        [AllowAnonymous]
         public ActionResult Index()
         {
-            AuditLog.Audit("HomeController - Index");
+            //AuditLog.Audit("HomeController - Index");
 
             return View();
         }
 
         public ActionResult About()
         {
-            AuditLog.Audit("HomeController - About");
+            //AuditLog.Audit("HomeController - About");
 
             ViewBag.Message = "Your application description page.";
 
@@ -27,7 +27,7 @@ namespace EntityManager.Controllers
 
         public ActionResult Contact()
         {
-            AuditLog.Audit("HomeController - Contact");
+            //AuditLog.Audit("HomeController - Contact");
 
             return View();
         }

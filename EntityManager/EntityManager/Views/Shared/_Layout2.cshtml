@@ -1,0 +1,418 @@
+﻿Skip to content
+This repository
+Pull requests
+Issues
+Gist
+@dnash-cs
+ Unwatch 11
+  Star 5
+ Fork 0communispace/Catalyst PRIVATE
+ branch: master  Catalyst/Source/Communispace/Web/Mvc/Views/Shared/_Layout2.cshtml
+@amcintyre-csamcintyre-cs 13 days ago CAT-5899 CAT-5620: Remove home1 controller and associated code
+10 contributors @gbarnett-cs @amcintyre-cs @krousseau-cs @ametzger-cs @sasipenko-cs @mbutler-cs @dkotin-cs @ataylor-cs @clogan-cs @dnash-cs
+RawBlameHistory     423 lines (346 sloc)  22.267 kB
+@using System.Configuration
+@using System.Threading
+@using System.Web.Optimization
+@using Communispace.Infrastructure.Extensions
+@using Communispace.ServiceContracts
+@using Communispace.Web.Mvc.Core.Application
+@using Communispace.Web.Mvc.Core.Utilities
+@using Communispace.Web.Mvc.Views.Shared
+@using PresentationWebService.DTOs
+@using Styles = System.Web.Optimization.Styles
+@{
+    var cp = (CspacePrincipal)Thread.CurrentPrincipal;
+    var canSeeAdminLink = Thread.CurrentPrincipal.IsInternalPowerUser();
+    var adminUrl = ConfigurationManager.AppSettings["AdminBaseUrl"];
+    var displayHero = !ViewBag.WurflCapabilities.IsMobile || ViewBag.WurflCapabilities.IsTablet;
+
+    var bodyClasses = string.Format("{0} {1} {2} {3} {4}",
+        (!string.IsNullOrEmpty(ViewBag.BodyClasses) ? ViewBag.BodyClasses : ""),
+        (ViewBag.LayoutViewModel.IsMemberDisplayMode ? "member-mode" : "non-member-mode"),
+        (ViewBag.WurflCapabilities.IsMobile && !ViewBag.WurflCapabilities.IsTablet ? "wurfl-mobile" :
+            ViewBag.WurflCapabilities.IsTablet ? "wurfl-tablet"
+                : "wurfl-non-mobile"),
+        (displayHero ? "hero-displayed" : "hero-omitted"),
+        ViewBag.EnableSignalr ? "signalr-enable" : "signalr-disable"); //signalr control. Disabled hub connections for iOS6 devices
+
+    var titlePrefix = !string.IsNullOrEmpty(ViewBag.TitlePrefix) ? ViewBag.TitlePrefix : Html.CurrentCommunityConfiguration().PageSettings.BrowserTitle;
+    var title = ViewBag.OverrideTitle != null && ViewBag.OverrideTitle ? ViewBag.Title :
+        string.Format("{0}{1}", titlePrefix,
+            !string.IsNullOrEmpty(ViewBag.Title) ? string.Format(" - {0}", ViewBag.Title) : string.Empty);
+}
+<!doctype html>
+<!--[if IE 8]>     <html class="ie8"> <![endif]-->
+<!--[if IE 9]>	   <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <title>@title</title>
+    @Html.Partial("~/Views/Shared/ApplicationIcons/_AppIconMeta.cshtml")
+    @*
+        you can uncomment this TEMPORARILY & LOCALLY ONLY if you'd like to perform profiling with MvcMiniProfiler
+        @MvcMiniProfiler.MiniProfiler.RenderIncludes()
+    *@
+    <!--[if lt IE 9]>
+        @Scripts.Render("~/min/js/ie/polyfill")
+    <![endif]-->
+    @Html.Partial("~/Views/Shared/Common/_MetaTags.cshtml")
+
+    @Styles.Render("~/min/css/layout2")
+    @if (Html.CurrentCommunityConfiguration().Settings.UseEnhancedSupport)
+    {
+        @Styles.Render("~/min/css/support-tab")
+    }
+    <!--[if lt IE 9]>
+        @Styles.Render("~/min/css/ie")
+    <![endif]-->
+    @RenderSection("module_styles", required: false)
+    @Html.DirectThemeCssFile("community-theme2.css")
+
+</head>
+<body class="theme-body-background layout2 @bodyClasses">
+    <div id="container" class="grid-container">
+        <section id="masthead2" class="theme-primary-background">
+            <div id="top">@*placeholder for pre-scrolling to appropriate position down masthead image*@</div>
+            @if (displayHero)
+            {
+                <img id="masthead2-hero" width="1280"
+                     src="@string.Format("{0}/home2-hero.jpg", Html.GetDirectThemeUrl())"
+                     onload=" this.classname +=' loaded' ; @(ViewBag.WurflCapabilities.IsTablet ? "document.getElementById('top').scrollIntoView();" : "") "
+                         onerror=" this.classname +=' load-failed' ; " />
+                <div id="masthead2-blur-wrapper">
+                    <a class="hero-reveal iconfont" href="#"></a>
+                    <img id="masthead2-blur" src="data:image/gif;base64,R0lGODlhAAWAAIAAAP///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBRjhGQjZERjQ4MTIxMUU0QUM5MEEzMTFFMDc5NEE0NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBRjhGQjZFMDQ4MTIxMUU0QUM5MEEzMTFFMDc5NEE0NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkFGOEZCNkRENDgxMjExRTRBQzkwQTMxMUUwNzk0QTQ2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkFGOEZCNkRFNDgxMjExRTRBQzkwQTMxMUUwNzk0QTQ2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAAAsAAAAAAAFgAAAAv+Ej6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rO9/4PDAqHxKLxiEwql8ym8wmNSqfUqvWKzWq33K73Cw6Lx+Sy+YxOq9fstvsNj8vn9Lr9js/r9/y+/w8YKDhIWGh4iJiouMjY6PgIGSk5SVlpeYmZqbnJ2en5CRoqOkpaanqKmqq6ytrq+gobKztLW2t7i5uru8vb6/sLHCw8TFxsfIycrLzM3Oz8DB0tPU1dbX2Nna29zd3t/Q0eLj5OXm5+jp6uvs7e7v4OHy8/T19vf4+fr7/P3+//DzCgwIEECxo8iDChwoUMGzp8CDGixIkUK1q8iDGjxo3/HDt6/AgypMiRJEuaPIkypcqVLFu6fAkzpsyZNGvavIkzp86dPHv6/Ak0qNChRIsaPYo0qdKlTJs6fQo1qtSpVKtavYo1q9atXLt6/Qo2rNixZMuaPYs2rdq1bNu6fQs3rty5dOvavYs3r969fPv6/Qs4sODBhAsbPow4seLFjBs7fgw5suTJlCtbvow5s+bNnDt7/gw6tOjRpEubPo06terVrFu7fg07tuzZtGvbvo07t+7dvHv7/g08uPDhxIsbP448ufLlzJs7fw49uvTp1Ktbv449u/bt3Lt7/w4+vPjx5MubP48+vfr17Nu7fw8/vvz59Ovbv48/v/79/Pv7VP8PYIACDkhggQYeiGCCCi7IYIMOPghhhBJOSGGFFl6IYYYabshhhx5+CGKIIo5IYokmnohiiiquyGKLLr4IY4wyzkhjjTbeiGOOOu7IY48+/qhhAQA7" /> @* default 1280x256 blank GIF *@
+                    <div id="masthead2-tint" class="theme-masthead-tint"></div>
+                </div>
+            }
+            <a href="@Url.Action("Index", "Home2")#top"><img id="masthead2-logo" src="@string.Format("{0}/home2-logo.png", Html.GetDirectThemeUrl())" /></a>
+            <div class="iconfont hamburger"></div>
+            @Html.Partial("~/Views/Shared/Common/_UserProfileBanner.cshtml")
+        </section>
+
+        @if (ViewBag.WurflCapabilities.IsTablet) // we only do this trick on tablets now.
+        {
+            <script type="text/javascript">
+                    // IMPORTANT: this has to go early in the body (before our layout2-core load) so that we minimize the delay
+                    // before the scroll happens.  if we do this after our bundles load (even if we don't wait for window load),
+                    // there's a huge delay
+
+                    document.getElementById("top").scrollIntoView();
+
+            </script>
+        }
+
+        <div id="layout2-body" class="theme-primary-background">
+
+            <section id="layout2-nav-gutter">
+
+                <nav id="vertical-nav" class="theme-primary-background">
+                    <ul>
+                        <li class="@(ViewBag.Controller == "Home2" ? "active" : "")">
+                            <a id="nav-home" class="iconfont home" href="@Url.Action("Index", "Home2")">@HomePageResources.HomePageTitle<span class="badge"></span></a>
+                        </li>
+                        <li class="@(ViewBag.Controller == "Conversation" ? "active" : "")">
+                            <a id="nav-conversations" class="iconfont conversation" href="@Url.Action("", "Conversation")">@ActivityTypeResources.ConversationActivityPlural<span class="badge"></span></a>
+                        </li>
+                        @if (ViewBag.LayoutViewModel.IsQuickPollEnabled)
+                        {
+                            <li class="@(ViewBag.Controller == "QuickPoll2" ? "active" : "")">
+                                <a id="nav-quickpolls" class="iconfont quickpoll" href="@Url.Action("", "QuickPoll2")">@Html.GetActivityNameString("QuickPollResources.QuickPollListTitle")<span class="badge"></span></a>
+                            </li>
+                        }
+
+                        @*
+                            Community Chest
+                            - Facs, Admins, and CORE users see the "Community Chest" link that takes you to the list/CRUD flow
+                            - All users see any active community chests
+                            - All users see any legacy community chests
+                            Note: DisplayCommunityChestInLeftNav exists to be toggled via integration tests. It's not configurable anywhere else.
+                        *@
+                        @if (ViewBag.LayoutViewModel.IsCommunityChestEnabled || Html.CurrentCommunityConfiguration().Settings.Activities.DisplayCommunityChestInLeftNav)
+                        {
+                            if (cp.IsMember())
+                            {
+                                foreach (var navItem in ViewBag.LayoutViewModel.CommunityChestNavigationViewModel)
+                                {
+                                    <li class="community-chest-activity">
+                                        <a href="@Url.Action("Details", "CommunityChest", new { navItem.Id })" class="iconfont community-chest">@navItem.Title<span class="badge"></span></a>
+                                    </li>
+                                }
+                            }
+                            else if (!cp.IsMember())
+                            {
+                                <li class="@(ViewBag.Controller == "CommunityChest" ? "active" : "")">
+                                    <a id="nav-communitychest" class="iconfont community-chest" href="@Url.Action("", "CommunityChest")">@Html.GetActivityNameString("CommunityChestResources.CommunityChestListTitle")<span class="badge"></span></a>
+                                </li>
+                            }
+                        }
+                        @* END Community Chest *@
+
+                            @* Old-school Custom Activities *@
+                            @foreach (var navItem in MvcCommunityConfigurationProvider.GetCurrentConfig(ViewContext).NavigationItems.Where(x => !x.IsDisabled))
+                            {
+                                // root level check:
+                                if (Html.CanDisplayItem(navItem) &&
+                                    !navItem.IsDisabled &&
+                                    !string.IsNullOrEmpty(navItem.RelativeUrl) &&
+                                    navItem.RelativeUrl.ToLower().Contains("/customactivity")) // only custom activities
+                                {
+                                    @_RenderCustomActivityNavItem(navItem)
+                                }
+                                // 2nd level sub-nav check
+                                foreach (var subNavItem in navItem.NavigationItems.Where(x =>
+                                    Html.CanDisplayItem(x) &&
+                                    !x.IsDisabled &&
+                                    !string.IsNullOrEmpty(x.RelativeUrl) &&
+                                    x.RelativeUrl.ToLower().Contains("/customactivity"))) // only custom activities
+                                {
+                                    @_RenderCustomActivityNavItem(subNavItem)
+                                }
+                            }
+                            @* End old-school Custom Activities *@
+                            @if (ViewBag.LayoutViewModel.IsImpactEnabled)
+                            {
+                                <li class="@(ViewBag.Controller == "Impact" ? "active" : "")">
+                                    <a id="nav-impact" class="iconfont impact" href="@Url.Action("", "Impact")">@Html.GetActivityNameString("ImpactResources.ImpactListTitle")<span class="badge"></span></a>
+                                </li>
+                            }
+
+                            @if (ViewBag.WurflCapabilities.IsMobile)
+                            {
+                                <li><a id="nav-profile" class="iconfont profile" href="@Url.Action("Details", "MemberProfile", new { ParentId = ViewBag.LayoutViewModel.MemberId, IsScrapbook = "True" })">Profile</a></li>
+                            }
+
+                            @if (cp.IsFacilitator() || cp.IsCore() || cp.IsAdministrator())
+                            {
+                                <li class="@(ViewBag.Controller == "MessageCenter" ? "active" : "")">
+                                    <a id="nav-messagecenter" class="iconfont messagecenter" href="@Url.Action("", "MessageCenter")">@MessageCenterResources.MessageCenterTitle<span class="badge"></span></a>
+                                </li>
+                            }
+                            <li class="@(ViewBag.Controller == "Help" ? "active" : "")">
+                                <a id="nav-help" class="iconfont help" href="@Url.Action("", "Help")">@GeneralResources.HelpText</a>
+                            </li>
+
+                            @if (!cp.IsMember())
+                            {
+                                <li class="@(ViewBag.Controller == "Search" ? "active" : "")">
+                                    <a id="nav-browse" class="iconfont browse" href="@Url.Action("Browse", "FacetedSearch")">@SearchResources.BrowseTitle</a>
+                                </li>
+                            }
+                            @* BEGIN vertical nav insert for other non-custom-activity external links (e.g. archive)
+                                non-custom-activities are defined as nav items with a Url (absolute) that does
+                                NOT contain the substring "/customactivity"
+
+                                we must iterate over all non-disabled root nav items, so we can check 2nd level children as well
+                            *@
+                            @foreach (var navItem in MvcCommunityConfigurationProvider.GetCurrentConfig(ViewContext).NavigationItems.Where(x => !x.IsDisabled))
+                            {
+                                // root level check:
+                                if (Html.CanDisplayItem(navItem) &&
+                                    !navItem.IsDisabled &&
+                                    !string.IsNullOrEmpty(navItem.Url) &&
+                                    !navItem.Url.ToLower().Contains("/customactivity")) // only NON-custom activities
+                                {
+                                    @_RenderExternalLinkNavItem(navItem)
+                                }
+                                // 2nd level sub-nav check
+                                foreach (var subNavItem in navItem.NavigationItems.Where(x =>
+                                    Html.CanDisplayItem(x) &&
+                                    !x.IsDisabled &&
+                                    !string.IsNullOrEmpty(x.Url) &&
+                                    !x.Url.ToLower().Contains("/customactivity"))) // only NON-custom activities
+                                {
+                                    @_RenderExternalLinkNavItem(subNavItem)
+                                }
+                            }
+                            @* END vertical nav insert for non-custom-activity external links (e.g. archive) *@
+                            @if (UserUtilities.GetCommunityAffiliationCount() > 1)
+                            {
+                                <li><a id="nav-my-communities" class="iconfont my-communities" href="@Url.Action("MyCommunities", "Account")">@GeneralResources.MyCommunitiesText</a></li>
+                            }
+                            @if (canSeeAdminLink && !string.IsNullOrEmpty(adminUrl) && !ViewBag.WurflCapabilities.IsMobile)
+                            {
+                                <li><a id="nav-admin" class="iconfont admin" href="@adminUrl" target="_blank" title="@GeneralResources.AdminTooltipLabel">@GeneralResources.AdminLabel</a></li>
+                            }
+                            <li><a id="nav-sign-out" class="iconfont sign-out" href="@Url.Action("LogOff", "Account")">@GeneralResources.LogOffText</a></li>
+                        </ul>
+                    </nav>
+                    @if (ViewBag.LayoutViewModel.PreviousLastLoginTime != DateTime.MinValue)
+                    {
+                        <section id="last-login">
+                            @AccountResources.LastLoginColumnHeading: @UserUtilities.ConvertDateForUserDisplay(ViewBag.LayoutViewModel.PreviousLastLoginTime).ToString("g")
+                        </section>
+                    }
+                </section>
+                <section id="layout2-contents" class="theme-text-color">
+
+                    @if (!cp.IsMember())
+                    {
+                        @RenderPage("Navigation/_HorizontalNav.cshtml")
+                    }
+
+                    <main class="@ViewBag.MainClass">
+                        @RenderBody()
+                    </main>
+                    <footer id="page-footer">
+                        @RenderSection("additional_footer_content", required: false)
+                        @Html.RenderFooter(Html.CurrentCommunityConfiguration().PageSettings)
+                    </footer>
+                </section>
+            </div>
+        </div>@* #container *@
+
+        <!--
+            disabled legacy sections, /dev/null style
+            @RenderSection("BreadCrumbContent", required: false)
+            @RenderSection("LeftContent", required: false)
+        -->
+        @* wip custom modal/modaled - also WIP in layout2.scss
+            <div id="modal">
+                <h1>Hello, there</h1>
+                I'm a modal.
+            </div>
+            <div id="modal-cover"></div>
+            *@
+
+    @* general resource text *@
+    @Html.Hidden("session-is-about-to-expire-message", GeneralResources.SessionIsAboutToExpire)
+            *@
+
+    @* general resource text *@
+    @Html.Hidden("session-is-about-to-expire-message", GeneralResources.SessionIsAboutToExpire
+            @Html.Hidden("session-expire-header",GeneralResources.SessionExpireHeader)
+    @Html.Hidden("enable-session-expiration-message", @Html.CurrentCommunityConfiguration().Settings.Activities.SessionExpirationMessage)
+@Html.Hidden("delete-confirmation-message", ActivityResources.ConfirmationDeleteRequest)
+    @Html.Hidden("lose-changes-confirmation-message", ActivityResources.ConfirmationLostChanges)
+    @Html.Hidden("make-live-confirmation-message", ActivityResources.PromptSaveAsActive)
+
+    @* include site-wide handlebars templates *@
+    @Html.Partial("~/Views/Shared/DisplayTemplates/ActionDropdownTemplates.cshtml")
+                  @Html.Partial("~/Views/Shared/DisplayTemplates/CommonTemplates.cshtml")
+
+
+    <script type="text/javascript">
+
+        // prerequisites for layout2-core load
+        @Html.Partial("LocalizedStrings");
+
+
+                    <script type="text/javascript">
+
+        // prerequisites for layout2-core load
+        @Html.Partial("LocalizedStrings");
+        @Html.Partial("~/Views/Shared/CommunispaceContext.cshtml");
+
+                    </script>
+
+                    @Scripts.Render("~/min/js/layout2-core")
+
+                    @Html.Partial("~/Views/Shared/js/_i18nJs.cshtml")
+
+                    <script type="text/javascript">
+
+        // bind hamburger nav ASAP - something was delaying this on mobile/tablet
+        $('.hamburger').on('click', function () {
+            $('body').toggleClass('hamburgered');
+        });
+                    </script>
+
+                    @if (Html.CurrentCommunityConfiguration().Settings.UseEnhancedSupport)
+                    {
+                        @Scripts.Render("~/min/js/support-tab")
+                    }
+
+                    @* This is a dynamic script source, it cannot be bundled *@@SignalRHelper.RenderSignalRHubScript()
+
+                    <!--[if lte IE 9]>
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                communispace.core.ui.util.initMessaging();
+                            });
+                        </script>
+                    <![endif]-->
+                    <!--[if gt IE 9]><!-->
+                    <script type="text/javascript">
+        mediaCheck({
+            media: '(orientation: portrait) and (max-width: 480px), (orientation: landscape) and (max-width: 640px)',
+            entry: function () {
+                communispace.core.ui.util.stopMessaging();
+            },
+            exit: function () {
+                communispace.core.ui.util.initMessaging();
+            }
+        });
+                    </script>
+                    <!--<![endif]-->
+                    @Html.Partial("~/Views/Shared/im/_IM2.cshtml")
+
+                    @Html.Partial("~/Views/Shared/Analytics/Analytics.cshtml")
+
+                    @{
+                        if (Html.CurrentEnterpriseConfiguration().SocialIntegrationSettings.IsFacebookIntegrationEnabled)
+                        {
+                            ViewBag.Controller = "MemberProfile";
+                            <div id="fb-root" style="display:inline; margin-left:20px;"></div>
+                            @Html.Partial("~/Views/Shared/SocialIntegration/Facebook/Facebook.cshtml");
+
+                        }
+                    }
+
+                    <script type="text/javascript">
+        communispace.core.ui.util.init();
+
+        window.layout = new catalyst.layout2.Layout();
+        window.layout.init();
+
+                    </script>
+
+                    @RenderSection("module_javascript", required: false)
+                    @RenderSection("page_javascript", required: false) @* used by Search.cshtml only *@
+
+                    @if (ViewBag.WurflCapabilities.IsTablet) // we only do this trick on tablets now.
+                    {
+                        <script type="text/javascript">
+
+            // IMPORTANT: sometimes the early one doesn't work; this is our backup plan
+
+            document.getElementById("top").scrollIntoView();
+
+                        </script>
+                    }
+                </body>
+            </html>
+
+            @helper _RenderCustomActivityNavItem(NavigationItem navItem)
+{
+    string activeClass = ViewBag.CurrentCustomActivityId != null && navItem.RelativeUrl.Contains(ViewBag.CurrentCustomActivityId) ? "active" : "";
+
+    string iconClass = string.IsNullOrEmpty(navItem.IconClass) ? "community-chest" : navItem.IconClass;
+
+    <li class="@activeClass">
+        <a class="iconfont @iconClass" href="@navItem.RelativeUrl" @(navItem.IsPopup ? "target=\"_new\"" : "")>@navItem.PluralizedName</a>
+    </li>
+}
+
+            @helper _RenderExternalLinkNavItem(NavigationItem navItem)
+{
+    string iconClass = navItem.IconClass; // default to seldom/never-used nav file value
+    if (string.IsNullOrEmpty(iconClass))
+    {
+        if (navItem.Url.Contains("v5archive-"))
+        {
+            iconClass = "archive";
+        }
+        else
+        {
+            iconClass = "star";
+        }
+    }
+
+    <li>
+        <a class="iconfont @iconClass" href="@navItem.Url" @(navItem.IsPopup ? "target=\"_new\"" : "")>@navItem.PluralizedName</a>
+    </li>
+}
+            Status API Training Shop Blog About Help
+            © 2015 GitHub, Inc. Terms Privacy Security Contact

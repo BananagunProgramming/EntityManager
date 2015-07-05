@@ -1,6 +1,8 @@
 ﻿
+using System;
 using EF.Implementation;
 using EntityManager.Abstract;
+using EntityManager.Domain.CodeFirst;
 
 namespace EntityManager.Services
 {
@@ -10,11 +12,20 @@ namespace EntityManager.Services
         {
             
         }
+
         //put non generic methods here
+        public void CreateNewClientEntity(Client client)
+        {
+            //Client specific defaults
+            client.ClientId = Guid.NewGuid();
+            client.CreatedDate = DateTime.Now;
+
+            CreateEntity(client);
+        }
     }
 
     public interface IClientCommandService: IServiceCommandBase
     {
-        //define non generic methods here
+        void CreateNewClientEntity(Client client);
     }
 }

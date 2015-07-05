@@ -51,7 +51,7 @@ namespace EntityManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _clientCommandService.CreateEntity(client);
+                _clientCommandService.CreateNewClientEntity(client);
 
                 return RedirectToAction("Index");
             }

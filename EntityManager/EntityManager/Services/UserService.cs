@@ -2,6 +2,7 @@
 using System.Web;
 using EF.Implementation;
 using EntityManager.Models;
+using EntityManager.Models.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

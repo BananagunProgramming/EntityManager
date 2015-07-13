@@ -5,7 +5,6 @@ namespace EntityManager.Domain.CodeFirst
 {
     public class Client
     {
-        [Required]
         public Guid ClientId { get; set; }
         [Required]
         public string Name { get; set; }
@@ -22,5 +21,7 @@ namespace EntityManager.Domain.CodeFirst
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public virtual SubGroup SubGroup { get; set; }
     }
 }

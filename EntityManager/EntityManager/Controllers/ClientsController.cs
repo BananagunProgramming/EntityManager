@@ -6,7 +6,7 @@ using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
-    [Authorize(Roles = "canEdit")]
+    [Authorize(Roles = "admin")]
     public class ClientsController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();

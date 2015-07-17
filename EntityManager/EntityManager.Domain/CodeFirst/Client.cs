@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EntityManager.Domain.CodeFirst
 {
-    public class Client
+    public class Client : DomainBase
     {
         public Guid ClientId { get; set; }
         [Required]
@@ -22,9 +22,5 @@ namespace EntityManager.Domain.CodeFirst
         public string Managed { get; set; }
         
         public virtual SubGroup SubGroup { get; set; }
-
-        public bool IsDeleted { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
     }
 }

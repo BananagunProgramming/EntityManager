@@ -1,0 +1,25 @@
+﻿@model EntityManager.Models.GroupSubgroup.GroupGeneralViewModel
+           
+@using (Html.BeginForm("ManageGeneral", "Group", FormMethod.Post, new {@class = "manage-section"}))
+{
+    @Html.HiddenFor(x => x.Id)
+    
+    <header>
+        <section class="section-header">
+            <h3>Group</h3>
+        </section>
+    </header>
+    
+    <section id="manage-general" class="manage-section-display">
+        <label>Name:</label>
+        <span>@Model.Name</span>
+        <br/>
+        <label>Description:</label>
+        <span>@Model.Description</span>
+        <button id="edit-general">Edit</button>
+    </section>
+    
+    <section class="manag-section-edit">
+        
+    </section>
+}

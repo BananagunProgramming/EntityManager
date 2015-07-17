@@ -9,7 +9,7 @@ namespace EntityManager.DatabaseContexts
         public DbSet<Client> Clients { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<SubGroup> SubGroups { get; set; }
+        public DbSet<Subgroup> SubGroups { get; set; }
 
         public EntityManagerDbContext() : base("DefaultConnection") { }
 

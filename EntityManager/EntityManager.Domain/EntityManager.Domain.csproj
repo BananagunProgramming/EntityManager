@@ -69,7 +69,7 @@
     <Compile Include="CodeFirst\DomainBase.cs" />
     <Compile Include="CodeFirst\Group.cs" />
     <Compile Include="CodeFirst\State.cs" />
-    <Compile Include="CodeFirst\SubGroup.cs" />
+    <Compile Include="CodeFirst\Subgroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureWriter.cs" />
     <Compile Include="Services\AzureAudit.cs" />

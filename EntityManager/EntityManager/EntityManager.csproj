@@ -267,10 +267,15 @@
     <Compile Include="Migrations_EntityManagerDbContext\201507132343495_Initial.Designer.cs">
       <DependentUpon>201507132343495_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.Designer.cs">
+      <DependentUpon>201507170109174_build-out-group-models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
     <Compile Include="Models\Account\ManageViewModels.cs" />
+    <Compile Include="Models\GroupSubgroup\GroupInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClientCommandService.cs" />
     <Compile Include="Services\ClientQueryService.cs" />
@@ -371,6 +376,9 @@
     <Content Include="Views\Shared\Navigation\_HorizontalNav.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Manage.cshtml" />
+    <Content Include="Views\Group\ManageGeneral.cshtml" />
+    <Content Include="Views\Group\ManageSubGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201507132343495_Initial.resx">
       <DependentUpon>201507132343495_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.resx">
+      <DependentUpon>201507170109174_build-out-group-models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

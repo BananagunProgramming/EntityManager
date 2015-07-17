@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
+using EntityManager.Models.GroupSubgroup;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
@@ -35,6 +36,21 @@ namespace EntityManager.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Manage(Guid id)
+        {
+            //xxx this is whre I was on 7/16 - build out this method
+            var groupDetailModel = _groupQueryService.GetModelById(id);
+
+            return View("Manage", groupDetailModel);
+        }
+
+        [HttpPost]
+        public ActionResult ManageGeneral(GroupInputModel inputModel)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
         public ActionResult Create(Group input)
         {
@@ -46,16 +62,6 @@ namespace EntityManager.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Edit(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ActionResult Details(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public ActionResult Delete(Guid id)

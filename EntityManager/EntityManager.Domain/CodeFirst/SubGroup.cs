@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EntityManager.Domain.CodeFirst
 {
-    public class SubGroup : DomainBase
+    public class Subgroup : DomainBase
     {
         public Guid Id { get; set; }
         [Required]

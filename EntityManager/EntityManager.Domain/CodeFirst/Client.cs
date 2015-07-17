@@ -21,6 +21,6 @@ namespace EntityManager.Domain.CodeFirst
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
         
-        public virtual SubGroup SubGroup { get; set; }
+        public virtual Subgroup SubGroup { get; set; }
     }
 }

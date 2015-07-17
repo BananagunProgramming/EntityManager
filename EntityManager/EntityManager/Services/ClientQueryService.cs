@@ -15,7 +15,8 @@ namespace EntityManager.Services
     {
         private readonly IUserService _userService;
 
-        public ClientQueryService(DbContextScopeFactory dbContextScopeFactory, IUserService userService)
+        public ClientQueryService(DbContextScopeFactory dbContextScopeFactory, 
+            IUserService userService)
             : base(dbContextScopeFactory)
         {
             _userService = userService;
@@ -25,8 +26,8 @@ namespace EntityManager.Services
         {
             //do some sort of authorization here
             var entityCode = _userService.GetUserProperty("EntityCode");
-
-            return GetAllEntities<Client>().Where(x => x.EntityCode == entityCode);
+            
+            return GetAllEntities<Client>().Where(x => x.EntityCode == entityCode && x.IsDeleted == false);
         }
     }
 }

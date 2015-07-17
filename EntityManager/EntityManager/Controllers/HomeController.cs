@@ -11,8 +11,6 @@ namespace EntityManager.Controllers
 
         public ActionResult Index()
         {
-            //AuditLog.Audit("HomeController - Index");
-
             return View();
         }
 

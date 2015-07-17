@@ -1,0 +1,66 @@
+﻿using System;
+using System.Web.Mvc;
+using EntityManager.Domain.CodeFirst;
+using EntityManager.Domain.Services;
+using EntityManager.Services;
+
+namespace EntityManager.Controllers
+{
+    [Authorize(Roles = "admin")]
+    //[ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
+    public class GroupController : Controller
+    {
+        public static readonly AzureWriter AuditLog = new AzureWriter();
+
+        private readonly IGroupQueryService _groupQueryService;
+        private readonly IGroupCommandService _groupCommandService;
+
+        public GroupController(IGroupQueryService groupQueryService, 
+            IGroupCommandService groupCommandService)
+        {
+            _groupQueryService = groupQueryService;
+            _groupCommandService = groupCommandService;
+        }
+
+        public ActionResult Index()
+        {
+            var groups = _groupQueryService.GetAllGroups();
+
+            return View(groups);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Group input)
+        {
+            //authorization
+
+            if (ModelState.IsValid)
+            {
+                _groupCommandService.Create(input); 
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -6,7 +6,6 @@ using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
-    [Authorize(Roles = "admin")]
     public class ClientsController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();
@@ -47,11 +46,11 @@ namespace EntityManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientId,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed,CreatedDate")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed")] Client client)
         {
             if (ModelState.IsValid)
             {
-                _clientCommandService.CreateNewClientEntity(client);
+                _clientCommandService.Create(client);
 
                 return RedirectToAction("Index");
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Web.Mvc;
 using EF.Implementation;
 using EntityManager.Services;
@@ -24,6 +25,8 @@ namespace EntityManager.Infrastructure
             _kernel.Bind<IClientQueryService>().To<ClientQueryService>().WithConstructorArgument(dbContextScopeFactory);
             _kernel.Bind<IClientCommandService>().To<ClientCommandService>().WithConstructorArgument(dbContextScopeFactory);
             _kernel.Bind<IUserService>().To<UserService>().WithConstructorArgument(dbContextScopeFactory);
+            _kernel.Bind<IGroupQueryService>().To<GroupQueryService>().WithConstructorArgument(dbContextScopeFactory);
+            _kernel.Bind<IGroupCommandService>().To<GroupCommandService>().WithConstructorArgument(dbContextScopeFactory);
         }
 
         public object GetService(Type serviceType)

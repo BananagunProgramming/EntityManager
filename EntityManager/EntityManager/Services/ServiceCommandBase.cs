@@ -3,6 +3,7 @@ using System.Data.Entity.Migrations;
 using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
+using EntityManager.Domain.Services;
 
 namespace EntityManager.Services
 {

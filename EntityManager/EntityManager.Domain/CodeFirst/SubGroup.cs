@@ -13,7 +13,8 @@ namespace EntityManager.Domain.CodeFirst
 
         public virtual ICollection<Client> Clients { get; set; }
 
+        public bool IsDeleted { get; set; }
         public DateTime CreatedOn { get; set; }
-        public Guid CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

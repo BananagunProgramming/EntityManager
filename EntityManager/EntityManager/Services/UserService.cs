@@ -11,6 +11,7 @@ namespace EntityManager.Services
     public interface IUserService
     {
         string GetUserProperty(string property);
+        IPrincipal GetCurrentUser();
     }
 
     public class UserService : IUserService
@@ -36,6 +37,11 @@ namespace EntityManager.Services
                 var currentUser = manager.FindById(_user.Identity.GetUserId());
                 return currentUser.GetType().GetProperty(property).GetValue(currentUser, null).ToString();
             }
+        }
+
+        public IPrincipal GetCurrentUser()
+        {
+            return _user;
         }
     }
 }

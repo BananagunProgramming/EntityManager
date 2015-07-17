@@ -20,8 +20,11 @@ namespace EntityManager.Domain.CodeFirst
         public string YearEndDate { get; set; }
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
-        public DateTime CreatedDate { get; set; }
-
+        
         public virtual SubGroup SubGroup { get; set; }
+
+        public bool IsDeleted { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

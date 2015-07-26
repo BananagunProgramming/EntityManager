@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
@@ -26,7 +27,7 @@ namespace EntityManager.Services
 
                 var result = dbContext.Set<T>().Find(id);
 
-                AuditLog.Audit(typeof(T).ToString());
+                //AuditLog.Audit(typeof(T).ToString());
 
                 return result;
             }

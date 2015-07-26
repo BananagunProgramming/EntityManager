@@ -89,14 +89,14 @@
                     </ul>
                 </nav>
             </section>
-            
+
             <section id="layout-contents" class="theme-text-color">
-               @*if (User.IsInRole("admin"))
-               {*@
+                @*if (User.IsInRole("admin"))
+                    {*@
                 @RenderPage("Navigation/_HorizontalNav.cshtml")
-               @*}*@
+                @*}*@
                 @RenderBody()
-                
+
             </section>
         </div>
     </div>
@@ -104,7 +104,7 @@
     <footer class="container-fluid">
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>
-    
+
     <script type="text/javascript">
         document.getElementById("top").scrollIntoView();
     </script>
@@ -112,48 +112,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/entitymanager")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @*<aside class="col-sm-2">
         @if (Request.IsAuthenticated)

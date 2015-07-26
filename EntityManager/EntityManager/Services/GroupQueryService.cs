@@ -11,23 +11,40 @@ namespace EntityManager.Services
     public interface IGroupQueryService : IServiceQueryBase
     {
         IEnumerable<Group> GetAllGroups();
-        GroupManageViewModel GetModelById(Guid id);
+        GroupManageViewModel GetGeneralModelById(Guid id);
     }
 
     public class GroupQueryService : ServiceQueryBase, IGroupQueryService
     {
-        public GroupQueryService(DbContextScopeFactory dbContextScopeFactory) : base(dbContextScopeFactory)
-        {
-        }
+        public GroupQueryService(DbContextScopeFactory dbContextScopeFactory) : base(dbContextScopeFactory){}
 
         public IEnumerable<Group> GetAllGroups()
         {
-            return GetAllEntities<Group>().Where(x => x.IsDeleted == false);
+            return GetAllEntities<Group>().Where(x => x.IsDeleted == false).OrderBy(x => x.Name);
         }
 
-        public GroupManageViewModel GetModelById(Guid id)
+        public GroupManageViewModel GetGeneralModelById(Guid id)
         {
-            throw new NotImplementedException();
+            var model = GetEntity<Group>(id);
+
+            if (model.IsDeleted)
+            {
+                var exception = new NullReferenceException(String.Format("The group tied to Id {0} has been deleted", id));
+                //AuditLog.Error(exception);
+                throw exception;
+            }
+
+            var result = new GroupManageViewModel
+            {
+                Id = model.Id,
+                General = new GroupGeneralViewModel
+                {
+                    Name = model.Name,
+                    Description = model.Description
+                }
+            };
+
+            return result;
         }
     }
 }

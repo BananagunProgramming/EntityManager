@@ -12,8 +12,45 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+input, select {
+    max-width: 3600px;
+}
 textarea {
-    max-width: 280px;
+    max-width: 815px;
+    height: 6em;
+}
+
+/*inputs and labels*/
+.standard-label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin: 15px 0px 5px 0px;
+}
+.standard-input {
+    width: 60%;
+    font-size: 1.0em;
+    color: #585858;
+}
+
+.wide-input {
+    width: 100%;
+}
+
+/*iconfonts*/
+.iconfont-pencil:before {
+    content: "\e07f";
+}
+
+/*buttons*/
+.button-bar {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+}
+.manage-btn {
+    cursor: pointer;
+    position: relative;
+    top: 25px;
+    right: 15px;
 }

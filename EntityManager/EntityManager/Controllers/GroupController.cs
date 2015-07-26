@@ -39,8 +39,7 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Manage(Guid id)
         {
-            //xxx this is whre I was on 7/16 - build out this method
-            var groupDetailModel = _groupQueryService.GetModelById(id);
+            var groupDetailModel = _groupQueryService.GetGeneralModelById(id);
 
             return View("Manage", groupDetailModel);
         }

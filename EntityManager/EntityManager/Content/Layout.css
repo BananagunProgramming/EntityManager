@@ -42,6 +42,21 @@ header, footer {
     overflow: hidden;
 }
 
+.manage-container {
+    margin: 1.0em 3.25em;
+    padding: 0.75em 1.6em;
+}
+.section-header {
+    margin: .2em 0;
+    width: auto;
+}
+.manage-section {
+    display: inline-block;
+    padding-top: 1.25em;
+    position: relative;
+    width: 100%;
+}
+
 #layout-contents {
     margin-left: 22%;
     background-color: whitesmoke;
@@ -90,6 +105,13 @@ nav ul {
 }
 
 /*//theme section*/
+.theme-primary-text-color {
+    color: #D17B0F;
+ }
+.theme-secondary-text-color {
+       color: #434A54;
+}
+
 .theme-body-background {
     /*this is the whole page*/
     background-color: #D2FF96;
@@ -98,4 +120,9 @@ nav ul {
 .theme-primary-background {
     /*this is inside my container, working space*/
     background-color: #EDFF7A;
+}
+
+/*manage section styles*/
+.manage-section {
+    display: block;
 }

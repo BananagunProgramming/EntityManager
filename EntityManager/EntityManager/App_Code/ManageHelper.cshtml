@@ -1,0 +1,22 @@
+﻿@using System.Linq.Expressions
+
+@inherits EntityManager.HelperPage
+
+@helper EditButton(string id)
+{
+    <span class="button-bar">
+        <span id="@id" class="glyphicon glyphicon-edit manage-btn manage-edit-action theme-secondary-text-color">&nbsp;Edit</span>
+    </span>
+}
+
+@helper  SaveCancelButtons(string id)
+{
+    var cancelId = id + "-cancel";
+    var saveId = id + "-save";
+
+    <span class="button-bar">
+        <span id="@cancelId" class="glyphicon glyphicon-remove manage-btn manage-cancel-action theme-secondary-text-color">&nbsp;Cancel</span>
+        &nbsp;&nbsp;
+        <span id="@saveId" class="glyphicon glyphicon-save manage-btn manage-save-action theme-primary-text-color">&nbsp;Save</span>
+    </span>
+}

@@ -7,10 +7,15 @@
 
     $('#group-edit').on('click', function () {
         toggleGroupManage();
+        return false
     });
 
     $('#group-cancel').on('click', function() {
         toggleGroupManage();
     });
+
+    $('#group-save').on('click', function() {
+        alert('saving');
+    })
 
 })(window, $);

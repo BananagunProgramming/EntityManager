@@ -10,3 +10,14 @@
         @{Html.RenderPartial("ManageGeneral", Model.General);}
     </fieldset>
 </section>
+
+@section page_javascript
+{
+    @Scripts.Render("~/bundles/groupmanagement")
+
+    <script type="text/javascript">
+        $(function () {
+            new entitymanager.groupmanagement.GroupManagement().init();
+        })
+    </script>
+}

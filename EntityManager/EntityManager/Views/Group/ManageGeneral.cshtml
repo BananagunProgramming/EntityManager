@@ -1,18 +1,18 @@
 ﻿@model EntityManager.Models.GroupSubgroup.GroupGeneralViewModel
 
-@using (Html.BeginForm("ManageGeneral", "Group", FormMethod.Post, new { @class = "manage-section" }))
+@using (Html.BeginForm("ManageGeneral", "Group", FormMethod.Post, new { @Id = "generalform", @class = "manage-section" }))
 {
     @Html.AntiForgeryToken();
     @Html.HiddenFor(model => model.Id)
-    
+
     <section class="section-header">
-         <h3>Manage group</h3>
-     </section>
-    
+        <h3>Manage group</h3>
+    </section>
+
     <section class="manage-section" id="manage-general">
         <label class="standard-label">Group name:</label>
         <span class="standard-input">@Model.Name</span>
-        <br/>
+        <br />
         <label class="standard-label">Description:</label>
         <span class="standard-input">@Model.Description</span>
         @ManageHelper.EditButton("group-edit")
@@ -21,7 +21,7 @@
     <section class="manage-section" id="manage-general-edit" style="display:none">
         <div>
             <label class="standard-label" for="Name">Group name:</label>
-            @Html.TextBoxFor(x => x.Name, new {@class = "standard-input"})
+            @Html.TextBoxFor(x => x.Name, new { @class = "standard-input" })
             @Html.ValidationMessageFor(x => x.Name)
         </div>
         <div>

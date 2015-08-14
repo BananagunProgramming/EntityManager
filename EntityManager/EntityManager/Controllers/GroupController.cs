@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Routing;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
 using EntityManager.Models.GroupSubgroup;
@@ -8,6 +9,7 @@ using EntityManager.Services;
 namespace EntityManager.Controllers
 {
     [Authorize(Roles = "admin")]
+    [ValidateInput(false)]
     //[ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
     public class GroupController : Controller
     {
@@ -44,10 +46,41 @@ namespace EntityManager.Controllers
             return View("Manage", groupDetailModel);
         }
 
-        [HttpPost]
-        public ActionResult ManageGeneral(GroupInputModel inputModel)
+        [HttpGet]
+        public ActionResult ManageGeneral(Guid id)
         {
-            throw new NotImplementedException();
+            var group = _groupQueryService.GetEntity<Group>(id);
+
+            var vm = new GroupGeneralViewModel
+            {
+                Id = id,
+                Name = group.Name,
+                Description = group.Description
+            };
+
+            return PartialView(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ManageGeneral(GroupInputModel updateGroupModel)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError();
+            //}
+            if (ModelState.IsValid)
+            {
+                _groupCommandService.UpdateGroup(updateGroupModel);
+            }
+
+            var vm = new GroupGeneralViewModel
+            {
+                Id = updateGroupModel.Id,
+                Name =  updateGroupModel.Name,
+                Description = updateGroupModel.Description
+            };
+
+            return PartialView(vm);
         }
 
         [HttpPost]

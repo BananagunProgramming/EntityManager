@@ -4,13 +4,14 @@ using EF.Implementation;
 using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
 using EntityManager.Domain.Services;
+using WebGrease;
 
 namespace EntityManager.Services
 {
     public class ServiceCommandBase : ServiceQueryBase, IServiceCommandBase
     {
         public ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
-           : base(dbContextScopeFactory)
+            : base(dbContextScopeFactory)
         {
             DbContextScopeFactory = dbContextScopeFactory;
         }
@@ -20,8 +21,8 @@ namespace EntityManager.Services
             using (var dbContextScope = DbContextScopeFactory.Create())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
-                dbContext.Set<T>().AddOrUpdate(input);
 
+                dbContext.Set<T>().AddOrUpdate(input);
                 dbContext.SaveChanges();
             }
         }

@@ -6,7 +6,6 @@ using EntityManager.Models.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using EntityManager.Models;
 
 namespace EntityManager.Controllers
 {

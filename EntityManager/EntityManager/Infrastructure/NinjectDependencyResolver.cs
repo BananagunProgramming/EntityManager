@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Web.Mvc;
 using EF.Implementation;
 using EntityManager.Services;

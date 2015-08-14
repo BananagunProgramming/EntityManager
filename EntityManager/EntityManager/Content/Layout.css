@@ -22,10 +22,12 @@ header, footer {
 #masthead-hero {
     bottom: 0;
     display: block;
+    position: absolute;
     width: 100%;
 }
 
 #masthead {
+    height: 150px;
     position: relative;
 }
 

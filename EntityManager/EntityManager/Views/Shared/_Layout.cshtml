@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@{
+﻿@{
     ViewBag.Controller = ViewContext.RouteData.Values["controller"];
     ViewBag.Action = ViewContext.RouteData.Values["action"];
 }
@@ -105,15 +104,16 @@
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         document.getElementById("top").scrollIntoView();
-    </script>
+    </script>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/entitymanager")
-
+    @*@Scripts.Render("~/bundles/entitymanager") mobild and ipad stuff, renders Navigation.js in Scripts*@
+    
     @RenderSection("scripts", required: false)
+    @RenderSection("page_javascript", required: false)
 
 </body>
 </html>

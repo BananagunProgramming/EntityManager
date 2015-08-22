@@ -2,10 +2,12 @@
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
+using EntityManager.Infrastructure;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
+    [ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
     public class ClientsController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();
@@ -45,7 +47,6 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ClientId,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed")] Client client)
         {
             if (ModelState.IsValid)
@@ -70,7 +71,6 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ClientId,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed,CreatedDate")] Client client)
         {
             if (ModelState.IsValid)
@@ -92,9 +92,8 @@ namespace EntityManager.Controllers
             }
             return View(client);
         }
-
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult DeleteConfirmed(Guid id)
         {
             _clientCommandService.DeleteEntity<Client>(id);

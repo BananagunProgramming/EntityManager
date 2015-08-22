@@ -38,6 +38,10 @@
 </head>
 
 <body class="theme-body-background layout">
+
+    <%-- used for ajax in AddAntiForgeryToken() --%>
+    <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+
     <div id="container">
         <section id="masthead" class="theme-primary-background">
             <div id="top">@*placeholder for pre-scrolling to appropriate position down masthead image*@</div>
@@ -105,13 +109,13 @@
     </footer>
 
     @*<script type="text/javascript">
-        document.getElementById("top").scrollIntoView();
-    </script>*@
+            document.getElementById("top").scrollIntoView();
+        </script>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @*@Scripts.Render("~/bundles/entitymanager") mobild and ipad stuff, renders Navigation.js in Scripts*@
-    
+    @Scripts.Render("~/bundles/entitymanager/layout")
+
     @RenderSection("scripts", required: false)
     @RenderSection("page_javascript", required: false)
 

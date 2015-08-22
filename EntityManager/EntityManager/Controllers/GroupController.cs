@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
+using EntityManager.Infrastructure;
 using EntityManager.Models.GroupSubgroup;
 using EntityManager.Services;
 
@@ -9,7 +10,7 @@ namespace EntityManager.Controllers
 {
     [Authorize(Roles = "admin")]
     [ValidateInput(false)]
-    //[ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
+    [ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
     public class GroupController : Controller
     {
         public static readonly AzureWriter AuditLog = new AzureWriter();

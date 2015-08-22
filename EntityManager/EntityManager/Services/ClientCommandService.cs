@@ -25,6 +25,8 @@ namespace EntityManager.Services
             input.CreatedOn = DateTime.Now;
             input.CreatedBy = user.Identity.Name;
             input.IsDeleted = false;
+            input.LastUpdateDate = DateTime.Now;
+            input.LastUpdatedBy = user.Identity.Name;
 
             CreateEntity(input);
         }

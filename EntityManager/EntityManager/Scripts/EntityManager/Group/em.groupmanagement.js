@@ -22,14 +22,15 @@
                     toggleGroupManage();
                 });
 
-                $('#group-save').on('click', function () {
+                $('#group-save').on('click', function() {
                     var _this = this;
                     var url = "/Group/ManageGeneral/";
-
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: $('#generalform').serialize(),
+                    var postData = AddAntiForgeryToken() +'&' + $('#generalform').serialize();
+                    alert(postData);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: postData,
                         success: function (result) {
                             _this.$section = $(result).replaceAll($('#generalform'));
                             GroupManagement.prototype.init();

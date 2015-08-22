@@ -251,6 +251,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\ValidateAntiForgeryTokenOnControllerAttribute.cs" />
     <Compile Include="Migrations_AuthenticationContext\201503041701118_Initial.cs" />
     <Compile Include="Migrations_AuthenticationContext\201503041701118_Initial.Designer.cs">
       <DependentUpon>201503041701118_Initial.cs</DependentUpon>
@@ -317,6 +318,7 @@
     <None Include="Properties\PublishProfiles\EntityManager666.pubxml" />
     <None Include="Properties\PublishProfiles\EntityManager666__EMStaging.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\EntityManager\Global\layout.js" />
     <Content Include="Scripts\EntityManager\Group\em.groupmanagement.js" />
     <Content Include="Scripts\EntityManager\Navigation\Navigation.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -386,6 +388,9 @@
     <Content Include="Views\Group\ManageGeneral.cshtml" />
     <Content Include="Views\Group\ManageSubgroup.cshtml" />
     <Content Include="Views\Group\MCCreate.cshtml" />
+    <Content Include="Views\Exceptions\FatalError.cshtml" />
+    <Content Include="Views\Exceptions\Exception404.cshtml" />
+    <Content Include="Views\Exceptions\Exception500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

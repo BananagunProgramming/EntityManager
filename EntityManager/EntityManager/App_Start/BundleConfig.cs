@@ -26,9 +26,9 @@ namespace EntityManager
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/entitymanager").Include(
-            //    "~/Scripts/EntityManager/Navigation/Navigation.js"
-            //    ));
+            bundles.Add(new ScriptBundle("~/bundles/entitymanager/layout").Include(
+                "~/Scripts/EntityManager/Global/layout.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/groupmanagement").Include(
                 "~/Scripts/EntityManager/Group/em.groupmanagement.js"

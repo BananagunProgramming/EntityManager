@@ -15,8 +15,8 @@
     @Scripts.Render("~/bundles/groupmanagement")
 
     <script type="text/javascript">
-        $(function () {
-            new entitymanager.groupmanagement.GroupManagement().init();
-        })
+        window.onload = function() {
+            GroupManagement.init();
+        }
     </script>
 }

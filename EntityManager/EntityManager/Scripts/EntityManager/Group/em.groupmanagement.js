@@ -25,8 +25,8 @@
                 $('#group-save').on('click', function() {
                     var _this = this;
                     var url = "/Group/ManageGeneral/";
-                    var postData = AddAntiForgeryToken() +'&' + $('#generalform').serialize();
-                    alert(postData);
+                    //var postData = AddAntiForgeryToken() +'&' + $('#generalform').serialize();
+                    var postData = $('#generalform').serialize();
                         $.ajax({
                             type: "POST",
                             url: url,

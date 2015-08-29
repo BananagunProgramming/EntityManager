@@ -36,19 +36,13 @@
             });
         });
     }
-    
+
     toggleGroupManage = function () {
         $('#manage-general').toggle();
         $('#manage-general-edit').toggle();
     };
-    
+
     return {
-        init: init,
-        editGroup: editGroup,
-        cancel: cancel,
-        saveGroup: saveGroup,
-        toggleGroupManage: toggleGroupManage
+        init: init
     };
 }();
-
-

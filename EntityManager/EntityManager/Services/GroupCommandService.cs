@@ -36,7 +36,7 @@ namespace EntityManager.Services
             var group = GetEntity<Group>(input.Id);
 
             group.Name = input.Name;
-            group.Description = input.Description.ToString();
+            group.Description = input.Description;
             group.LastUpdateDate = DateTime.Now;
             group.LastUpdatedBy = user.Identity.Name;
 

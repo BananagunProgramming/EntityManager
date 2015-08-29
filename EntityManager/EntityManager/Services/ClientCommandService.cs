@@ -17,7 +17,7 @@ namespace EntityManager.Services
         }
 
         //put non generic methods here
-        public void Create(Client input)
+        public void CreateClient(Client input)
         {
             var user = _userService.GetCurrentUser();
 
@@ -30,10 +30,41 @@ namespace EntityManager.Services
 
             CreateEntity(input);
         }
+
+        public void UpdateClient(Client input)
+        {
+            var user = _userService.GetCurrentUser();
+            var client = GetEntity<Client>(input.ClientId);
+
+            client.Name = input.Name;
+            client.EntityCode = input.EntityCode;
+            client.YearIncorporated = input.YearIncorporated;
+            client.TaxId = input.TaxId;
+            client.Phone = input.Phone;
+            client.Fax = input.Fax;
+            client.Email = input.Email;
+            client.Website = input.Website;
+            client.Schedule = input.Schedule;
+            client.YearEndDate = input.YearEndDate;
+            client.FiscalYearEndDate = input.FiscalYearEndDate;
+            client.Managed = input.Managed;
+
+            client.LastUpdateDate = DateTime.Now;
+            client.LastUpdatedBy = user.Identity.Name;
+
+            UpdateEntity(client);
+        }
+
+        public void DeleteClient(Guid id)
+        {
+            DeleteEntity<Client>(id);
+        }
     }
 
     public interface IClientCommandService : IServiceCommandBase
     {
-        void Create(Client client);
+        void CreateClient(Client input);
+        void UpdateClient(Client input);
+        void DeleteClient(Guid id);
     }
 }

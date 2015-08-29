@@ -12,6 +12,7 @@ namespace EntityManager.Services
     {
         IEnumerable<Group> GetAllGroups();
         GroupManageViewModel GetGeneralModelById(Guid id);
+        Group GetGroupById(Guid id);
     }
 
     public class GroupQueryService : ServiceQueryBase, IGroupQueryService
@@ -45,6 +46,12 @@ namespace EntityManager.Services
             };
 
             return result;
+        }
+
+        public Group GetGroupById(Guid id)
+        {
+            //authorizaton
+            return GetEntity<Group>(id);
         }
     }
 }

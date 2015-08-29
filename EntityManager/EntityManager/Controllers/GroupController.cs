@@ -25,6 +25,7 @@ namespace EntityManager.Controllers
             _groupCommandService = groupCommandService;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var groups = _groupQueryService.GetAllGroups();
@@ -49,7 +50,7 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult ManageGeneral(Guid id)
         {
-            var group = _groupQueryService.GetEntity<Group>(id);
+            var group = _groupQueryService.GetGroupById(id);
 
             var vm = new GroupGeneralViewModel
             {

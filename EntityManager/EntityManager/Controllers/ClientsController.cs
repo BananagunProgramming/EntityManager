@@ -24,15 +24,17 @@ namespace EntityManager.Controllers
             _clientCommandService = clientCommandService;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {//example of how controller should go through the associated service to get info so that I 
             //can perform authorization and  return only that clients information, vertical striation.
             return View(_clientQueryService.GetClientSpecificEntities());
         }
 
+        [HttpGet]
         public ActionResult Details(Guid id)
         {//example of how not to do it. Going to service base class and using the generic methods directly. No chance for auth or vertical here.
-            var client = _clientQueryService.GetEntity<Client>(id);
+            var client = _clientQueryService.GetClientById(id);
 
             if (client == null)
             {
@@ -41,9 +43,34 @@ namespace EntityManager.Controllers
             return View(client);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(Guid id)
+        {
+            var client = _clientQueryService.GetClientById(id);
+
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+            return View(client);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var client = _clientQueryService.GetClientById(id);
+
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+            return View(client);
         }
 
         [HttpPost]
@@ -51,22 +78,11 @@ namespace EntityManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _clientCommandService.Create(client);
+                _clientCommandService.CreateClient(client);
 
                 return RedirectToAction("Index");
             }
 
-            return View(client);
-        }
-
-        public ActionResult Edit(Guid id)
-        {
-            var client = _clientQueryService.GetEntity<Client>(id);
-
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
             return View(client);
         }
 
@@ -75,28 +91,17 @@ namespace EntityManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _clientCommandService.UpdateEntity(client);
+                _clientCommandService.UpdateClient(client);
 
                 return RedirectToAction("Index");
             }
             return View(client);
         }
-
-        public ActionResult Delete(Guid id)
-        {
-            var client = _clientQueryService.GetEntity<Client>(id);
-
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
-        }
-        [HttpPost, ActionName("Delete")]
         
+        [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            _clientCommandService.DeleteEntity<Client>(id);
+            _clientCommandService.DeleteClient(id);
 
             return RedirectToAction("Index");
         }

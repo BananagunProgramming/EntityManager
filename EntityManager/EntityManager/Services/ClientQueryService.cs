@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EF.Implementation;
 using EntityManager.Abstract;
@@ -9,6 +10,7 @@ namespace EntityManager.Services
     public interface IClientQueryService : IServiceQueryBase
     {
         IEnumerable<Client> GetClientSpecificEntities();
+        Client GetClientById(Guid id);
     }
 
     public class ClientQueryService : ServiceQueryBase, IClientQueryService
@@ -28,6 +30,11 @@ namespace EntityManager.Services
             var entityCode = _userService.GetUserProperty("EntityCode");
             
             return GetAllEntities<Client>().Where(x => x.EntityCode == entityCode && x.IsDeleted == false);
+        }
+
+        public Client GetClientById(Guid id)
+        {
+            return GetEntity<Client>(id);
         }
     }
 }

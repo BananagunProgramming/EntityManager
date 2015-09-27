@@ -33,7 +33,7 @@ namespace EntityManager.Controllers
 
         [HttpGet]
         public ActionResult Details(Guid id)
-        {//example of how not to do it. Going to service base class and using the generic methods directly. No chance for auth or vertical here.
+        {
             var client = _clientQueryService.GetClientById(id);
 
             if (client == null)

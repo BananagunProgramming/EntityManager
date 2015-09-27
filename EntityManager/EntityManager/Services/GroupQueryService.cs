@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Models.GroupSubgroup;
 
 namespace EntityManager.Services
 {
-    public interface IGroupQueryService : IServiceQueryBase
+    public interface IGroupQueryService
     {
         IEnumerable<Group> GetAllGroups();
         GroupManageViewModel GetGeneralModelById(Guid id);

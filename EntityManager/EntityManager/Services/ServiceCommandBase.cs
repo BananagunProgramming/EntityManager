@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
 
 namespace EntityManager.Services
 {
-    public class ServiceCommandBase : ServiceQueryBase, IServiceCommandBase
+    public abstract class ServiceCommandBase : ServiceQueryBase
     {
-        public ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
+        protected ServiceCommandBase(DbContextScopeFactory dbContextScopeFactory)
             : base(dbContextScopeFactory)
         {
             DbContextScopeFactory = dbContextScopeFactory;
@@ -23,6 +22,11 @@ namespace EntityManager.Services
                 dbContext.Set<T>().AddOrUpdate(input);
                 dbContext.SaveChanges();
             }
+        }
+
+        public void MotherFucker(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public void DeleteEntity<T>(Guid id) where T : class

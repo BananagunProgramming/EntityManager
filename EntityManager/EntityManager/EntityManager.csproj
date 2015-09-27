@@ -233,8 +233,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IServiceQueryBase.cs" />
-    <Compile Include="Abstract\IServiceCommandBase.cs" />
     <Content Include="App_Code\HelperPage.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -393,6 +391,7 @@
     <Content Include="Views\Exceptions\Exception500.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Abstract\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

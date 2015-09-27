@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.Domain.CodeFirst;
 
 namespace EntityManager.Services
 {
-    public interface IClientQueryService : IServiceQueryBase
+    public interface IClientQueryService
     {
         IEnumerable<Client> GetClientSpecificEntities();
         Client GetClientById(Guid id);

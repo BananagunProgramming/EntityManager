@@ -1,7 +1,6 @@
 ﻿
 using System;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.Domain.CodeFirst;
 
 namespace EntityManager.Services
@@ -61,7 +60,7 @@ namespace EntityManager.Services
         }
     }
 
-    public interface IClientCommandService : IServiceCommandBase
+    public interface IClientCommandService
     {
         void CreateClient(Client input);
         void UpdateClient(Client input);

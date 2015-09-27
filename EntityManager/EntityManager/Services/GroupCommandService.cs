@@ -1,6 +1,5 @@
 ﻿using System;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Models.GroupSubgroup;
 
@@ -44,7 +43,7 @@ namespace EntityManager.Services
         }
     }
 
-    public interface IGroupCommandService : IServiceCommandBase
+    public interface IGroupCommandService
     {
         void Create(Group group);
         void UpdateGroup(GroupInputModel input);

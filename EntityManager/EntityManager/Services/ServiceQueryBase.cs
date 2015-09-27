@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using EF.Implementation;
-using EntityManager.Abstract;
 using EntityManager.DatabaseContexts;
 using EntityManager.Domain.Services;
 
 namespace EntityManager.Services
 {
-    public class ServiceQueryBase : IServiceQueryBase
+    public abstract class ServiceQueryBase
     {
         public DbContextScopeFactory DbContextScopeFactory;
         public static readonly AzureWriter AuditLog = new AzureWriter();
 
-        public ServiceQueryBase(DbContextScopeFactory dbContextScopeFactory)
+        protected ServiceQueryBase(DbContextScopeFactory dbContextScopeFactory)
         {
             DbContextScopeFactory = dbContextScopeFactory;
         }

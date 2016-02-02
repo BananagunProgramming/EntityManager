@@ -29,10 +29,15 @@
                 type: "POST",
                 url: url,
                 data: postData,
-                success: function (result) {
-                    _this.$section = $(result).replaceAll($('#generalform'));
-                    init();
-                },
+                success: function (response) {
+                    if (response != null && !response.success) {
+                        $('#result').html(response.responseText);
+                    } else {
+                        $('#result').html(response.responseText);
+                        init();
+                        
+                    }
+                }
             });
         });
     }

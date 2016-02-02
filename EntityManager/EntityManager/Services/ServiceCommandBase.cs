@@ -24,11 +24,6 @@ namespace EntityManager.Services
             }
         }
 
-        public void MotherFucker(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeleteEntity<T>(Guid id) where T : class
         {
             using (var dbContextScope = DbContextScopeFactory.Create())

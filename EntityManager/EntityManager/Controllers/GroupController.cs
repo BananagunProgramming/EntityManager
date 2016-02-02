@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
@@ -65,23 +66,25 @@ namespace EntityManager.Controllers
         [HttpPost]
         public ActionResult ManageGeneral(GroupInputModel updateGroupModel)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    ModelState.AddModelError();
-            //}
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _groupCommandService.UpdateGroup(updateGroupModel);
+                var firstError = ModelState.Values.SelectMany(e => e.Errors).First().ErrorMessage;
+
+                return Json(new { success = false, responseText = firstError }, JsonRequestBehavior.AllowGet);
+                
             }
 
-            var vm = new GroupGeneralViewModel
-            {
-                Id = updateGroupModel.Id,
-                Name =  updateGroupModel.Name,
-                Description = updateGroupModel.Description
-            };
+            _groupCommandService.UpdateGroup(updateGroupModel);
 
-            return PartialView(vm);
+            //var vm = new GroupGeneralViewModel
+            //{
+            //    Id = updateGroupModel.Id,
+            //    Name = updateGroupModel.Name,
+            //    Description = updateGroupModel.Description
+            //};
+            return Json(new { success = true, responseText = "Record saved successfully" }, JsonRequestBehavior.AllowGet);
+            //return PartialView(vm);
+            
         }
 
         [HttpPost]

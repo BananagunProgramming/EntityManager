@@ -88,16 +88,17 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Group input)
+        public ActionResult Create(Group model)
         {
             //authorization
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _groupCommandService.Create(input); 
+                return View(model);
             }
 
-            return RedirectToAction("Index");
+            var id = _groupCommandService.Create(model);
+
+            return RedirectToAction("Manage", new { @id = id });
         }
 
         public ActionResult Delete(Guid id)

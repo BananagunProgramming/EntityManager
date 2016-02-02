@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>58cb0bf4</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/58aa231e-e1f0-4087-b1a5-4cd2ac703a7c/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/EntityManager</ApplicationInsightsResourceId>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -263,17 +264,9 @@
       <DependentUpon>201504192325287_AddEntityCode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations_AuthenticationContext\Configuration.cs" />
-    <Compile Include="Migrations_EntityManagerDbContext\201507132343495_Initial.cs" />
-    <Compile Include="Migrations_EntityManagerDbContext\201507132343495_Initial.Designer.cs">
-      <DependentUpon>201507132343495_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.cs" />
-    <Compile Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.Designer.cs">
-      <DependentUpon>201507170109174_build-out-group-models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations_EntityManagerDbContext\201508081259421_update_model_base.cs" />
-    <Compile Include="Migrations_EntityManagerDbContext\201508081259421_update_model_base.Designer.cs">
-      <DependentUpon>201508081259421_update_model_base.cs</DependentUpon>
+    <Compile Include="Migrations_EntityManagerDbContext\201602020120563_Initial.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201602020120563_Initial.Designer.cs">
+      <DependentUpon>201602020120563_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
@@ -385,7 +378,6 @@
     <Content Include="Views\Group\Manage.cshtml" />
     <Content Include="Views\Group\ManageGeneral.cshtml" />
     <Content Include="Views\Group\ManageSubgroup.cshtml" />
-    <Content Include="Views\Group\MCCreate.cshtml" />
     <Content Include="Views\Exceptions\FatalError.cshtml" />
     <Content Include="Views\Exceptions\Exception404.cshtml" />
     <Content Include="Views\Exceptions\Exception500.cshtml" />
@@ -418,14 +410,8 @@
     <EmbeddedResource Include="Migrations_AuthenticationContext\201504192325287_AddEntityCode.resx">
       <DependentUpon>201504192325287_AddEntityCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201507132343495_Initial.resx">
-      <DependentUpon>201507132343495_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201507170109174_build-out-group-models.resx">
-      <DependentUpon>201507170109174_build-out-group-models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201508081259421_update_model_base.resx">
-      <DependentUpon>201508081259421_update_model_base.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201602020120563_Initial.resx">
+      <DependentUpon>201602020120563_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

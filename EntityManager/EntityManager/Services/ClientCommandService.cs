@@ -21,8 +21,6 @@ namespace EntityManager.Services
             var user = _userService.GetCurrentUser();
 
             input.ClientId = Guid.NewGuid();
-            input.CreatedOn = DateTime.Now;
-            input.CreatedBy = user.Identity.Name;
             input.IsDeleted = false;
             input.LastUpdateDate = DateTime.Now;
             input.LastUpdatedBy = user.Identity.Name;

@@ -15,18 +15,20 @@ namespace EntityManager.Services
             _userService = userService;
         }
 
-        public void Create(Group input)
+        public Guid Create(Group input)
         {
             var user = _userService.GetCurrentUser();
 
             input.Id = Guid.NewGuid();
-            input.CreatedOn = DateTime.Now;
-            input.CreatedBy = user.Identity.Name;
+            input.LastUpdateDate = DateTime.Now;
+            input.LastUpdatedBy = user.Identity.Name;
             input.IsDeleted = false;
 
             CreateEntity(input);
 
             AuditLog.Audit(String.Format("GroupCommandService - Group: {0} - User: {1} - {2}", input.Name, user.Identity.Name, DateTime.Now));
+
+            return input.Id;
         }
 
         public void UpdateGroup(GroupInputModel input)
@@ -45,7 +47,7 @@ namespace EntityManager.Services
 
     public interface IGroupCommandService
     {
-        void Create(Group group);
+        Guid Create(Group group);
         void UpdateGroup(GroupInputModel input);
     }
 }

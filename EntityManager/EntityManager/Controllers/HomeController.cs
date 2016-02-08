@@ -16,7 +16,7 @@ namespace EntityManager.Controllers
 
         public ActionResult About()
         {
-            //AuditLog.Audit("HomeController - About");
+            AuditLog.Audit("HomeController - About");
 
             ViewBag.Message = "Your application description page.";
 

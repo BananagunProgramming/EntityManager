@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Microsoft.Azure;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;

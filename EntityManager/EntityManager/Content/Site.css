@@ -23,8 +23,7 @@ textarea {
 /*inputs and labels*/
 .standard-label {
     display: block;
-    font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 15px 0px 5px 0px;
 }
 .standard-input {
@@ -53,4 +52,11 @@ textarea {
     position: relative;
     top: 25px;
     right: 15px;
+}
+
+.field-validation-error {
+    color: cornflowerblue;
+}
+.input-validation-error {
+    background-color: #e6f2ff;
 }

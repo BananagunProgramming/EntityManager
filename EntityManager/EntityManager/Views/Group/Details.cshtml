@@ -1,0 +1,25 @@
+﻿@model EntityManager.Models.GroupSubgroup.GroupModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-header">
+    <h3>Manage group</h3>
+</section>
+
+<section class="manage-section" id="manage-general">
+    <label class="standard-label">Group name:</label>
+    <span class="standard-input">@Model.Name</span>
+    <br/>
+    <label class="standard-label">Description:</label>
+    <span class="standard-input">@Model.Description</span>
+</section>
+
+<p>
+    <div id="buttons">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Cancel", "Index")
+    </div>
+</p>

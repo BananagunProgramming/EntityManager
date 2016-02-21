@@ -26,6 +26,7 @@ namespace EntityManager.Controllers
             _groupCommandService = groupCommandService;
         }
 
+        #region GETs
         [HttpGet]
         public ActionResult Index()
         {
@@ -41,52 +42,43 @@ namespace EntityManager.Controllers
         }
 
         [HttpGet]
-        public ActionResult Manage(Guid id)
+        public ActionResult Details(Guid id)
         {
-            var groupDetailModel = _groupQueryService.GetGeneralModelById(id);
+            var groupDetailModel = _groupQueryService.GetGroupModelById(id);
 
-            return View("Manage", groupDetailModel);
+            return View("Details", groupDetailModel);
         }
 
         [HttpGet]
-        public ActionResult ManageGeneral(Guid id)
+        public ActionResult Edit(Guid id)
         {
             var group = _groupQueryService.GetGroupById(id);
 
-            var vm = new GroupGeneralViewModel
+            var vm = new GroupModel
             {
                 Id = id,
                 Name = group.Name,
                 Description = group.Description
             };
 
-            return PartialView(vm);
+            return View(vm);
         }
 
-        [HttpPost]
-        public ActionResult ManageGeneral(GroupInputModel updateGroupModel)
+        [HttpGet]
+        public ActionResult Delete(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                var firstError = ModelState.Values.SelectMany(e => e.Errors).First().ErrorMessage;
+            var group = _groupQueryService.GetGroupModelById(id);
 
-                return Json(new { success = false, responseText = firstError }, JsonRequestBehavior.AllowGet);
-                
+            if (group == null)
+            {
+                return HttpNotFound();
             }
 
-            _groupCommandService.UpdateGroup(updateGroupModel);
-
-            //var vm = new GroupGeneralViewModel
-            //{
-            //    Id = updateGroupModel.Id,
-            //    Name = updateGroupModel.Name,
-            //    Description = updateGroupModel.Description
-            //};
-            return Json(new { success = true, responseText = "Record saved successfully" }, JsonRequestBehavior.AllowGet);
-            //return PartialView(vm);
-            
+            return View(group);
         }
+        #endregion
 
+        #region POSTs
         [HttpPost]
         public ActionResult Create(Group model)
         {
@@ -98,12 +90,33 @@ namespace EntityManager.Controllers
 
             var id = _groupCommandService.Create(model);
 
-            return RedirectToAction("Manage", new { @id = id });
+            return RedirectToAction("Details", new { @id = id });
         }
 
-        public ActionResult Delete(Guid id)
+        [HttpPost]
+        public ActionResult Save(GroupModel updateGroupModel)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", updateGroupModel);
+            }
+
+            if (ModelState.IsValid)
+            {
+                _groupCommandService.UpdateGroup(updateGroupModel);
+            }
+            
+            return RedirectToAction("Details", new {@id = updateGroupModel.Id});
         }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(Guid id)
+        {
+            _groupCommandService.DeleteGroup(id);
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

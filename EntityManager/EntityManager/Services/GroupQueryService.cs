@@ -10,7 +10,7 @@ namespace EntityManager.Services
     public interface IGroupQueryService
     {
         IEnumerable<Group> GetAllGroups();
-        GroupManageViewModel GetGeneralModelById(Guid id);
+        GroupModel GetGroupModelById(Guid id);
         Group GetGroupById(Guid id);
     }
 
@@ -23,7 +23,7 @@ namespace EntityManager.Services
             return GetAllEntities<Group>().Where(x => x.IsDeleted == false).OrderBy(x => x.Name);
         }
 
-        public GroupManageViewModel GetGeneralModelById(Guid id)
+        public GroupModel GetGroupModelById(Guid id)
         {
             var model = GetEntity<Group>(id);
 
@@ -34,14 +34,11 @@ namespace EntityManager.Services
                 throw exception;
             }
 
-            var result = new GroupManageViewModel
+            var result = new GroupModel
             {
                 Id = model.Id,
-                General = new GroupGeneralViewModel
-                {
-                    Name = model.Name,
-                    Description = model.Description
-                }
+                Name = model.Name,
+                Description = model.Description
             };
 
             return result;

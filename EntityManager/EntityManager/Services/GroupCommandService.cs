@@ -31,7 +31,7 @@ namespace EntityManager.Services
             return input.Id;
         }
 
-        public void UpdateGroup(GroupInputModel input)
+        public void UpdateGroup(GroupModel input)
         {
             var user = _userService.GetCurrentUser();
             var group = GetEntity<Group>(input.Id);
@@ -43,11 +43,17 @@ namespace EntityManager.Services
 
             UpdateEntity(group);
         }
+
+        public void DeleteGroup(Guid id)
+        {
+            DeleteEntity<Group>(id);
+        }
     }
 
     public interface IGroupCommandService
     {
         Guid Create(Group group);
-        void UpdateGroup(GroupInputModel input);
+        void UpdateGroup(GroupModel input);
+        void DeleteGroup(Guid id);
     }
 }

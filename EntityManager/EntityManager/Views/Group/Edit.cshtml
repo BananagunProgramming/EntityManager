@@ -1,0 +1,32 @@
+﻿@model EntityManager.Models.GroupSubgroup.GroupModel
+
+@{
+    ViewBag.Title = "Edit group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Edit group</h5>
+
+@using (Html.BeginForm("Save", "Group", FormMethod.Post, new { @Id = "generalform", @class = "manage-section" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <section class="manage-section" id="edit">
+        <div>
+            <label class="standard-label">Group name:</label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "standard-input" })
+            <div>@Html.ValidationMessageFor(x => x.Name)</div>
+        </div>
+        <div>
+            <label class="standard-label">Description:</label>
+            @Html.TextAreaFor(x => x.Description, new { @class = "wide-input" })
+            <div>@Html.ValidationMessageFor(x => x.Description)</div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default"/>
+            @Html.ActionLink("Cancel", "Index")
+        </div>
+    </section>
+}

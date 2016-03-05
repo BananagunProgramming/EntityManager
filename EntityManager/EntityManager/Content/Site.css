@@ -3,6 +3,9 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.body {
+    color: cornflowerblue;
+}
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -13,27 +16,33 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input, select {
-    max-width: 3600px;
+    max-width: 450px;
 }
 textarea {
-    max-width: 815px;
-    height: 6em;
+    max-width: 50%;
 }
 
 /*inputs and labels*/
 .standard-label {
     display: block;
-    font-size: 1.1em;
+    font-size: 1.0em;
     margin: 15px 0px 5px 0px;
 }
+/*inputs*/
 .standard-input {
-    width: 60%;
-    font-size: 1.0em;
+    width: 40%;
+    font-size: .9em;
     color: #585858;
 }
-
 .wide-input {
-    width: 100%;
+    width: 60%;
+}
+/*end inputs*/
+
+.section-header {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 /*iconfonts*/
@@ -47,13 +56,32 @@ textarea {
     top: 11px;
     right: 15px;
 }
-.manage-btn {
+.active-buttton {
+    padding: .375em 1em;
+    margin: 10px 10px 10px 1px;
+    white-space: nowrap;
     cursor: pointer;
-    position: relative;
-    top: 25px;
-    right: 15px;
+    background-color: greenyellow;
+    border: 1px solid transparent;
 }
 
+.inactive-buttton {
+    padding: .375em 1em;
+    white-space: nowrap;
+    color: whitesmoke;
+    border: 1px;
+    padding: 9px 16px 10px 14px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: grey;
+    border: 1px solid transparent;
+}
+
+.button-set {
+    margin: 10px 10px 10px 0px;
+}
+
+/*error*/
 .field-validation-error {
     color: cornflowerblue;
 }

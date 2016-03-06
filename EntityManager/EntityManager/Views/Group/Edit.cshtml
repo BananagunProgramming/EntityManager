@@ -12,23 +12,21 @@
 
     <section class="manage-section" id="edit">
         <div>
-            <h5>Edit group</h5>
-            <hr/>
+            <h5>Edit group</h5><hr/>
         </div>
         <div>
             <h6>Group name:</h6>
-            @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
             <div>@Html.ValidationMessageFor(x => x.Name)</div>
         </div>
         <div>
             <h6>Description:</h6>
-            @Html.TextAreaFor(x => x.Description, new {@rows = "5", @class = "form-control"})
+            @Html.TextAreaFor(model => model.Description, new { @rows = "5", @class = "form-control"})
             <div>@Html.ValidationMessageFor(x => x.Description)</div>
         </div>
-
         <div class="button-set">
             <input type="submit" class="btn btn-success" value="Save">
-            @Html.ActionLink("Cancel", "Index", null, new {@class="btn btn-secondary", @role="button"})
+            @Html.ActionLink("Cancel", "Index", null, new { @class="btn btn-secondary", @role="button"})
         </div>
     </section>
 }

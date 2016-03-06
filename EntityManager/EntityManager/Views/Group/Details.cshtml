@@ -1,25 +1,30 @@
 ﻿@model EntityManager.Models.GroupSubgroup.GroupModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Group details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="section-header">
-    <h3>Manage group</h3>
-</section>
+<section class="manage-section">
+    
+    @Html.HiddenFor(model => model.Id)
 
-<section class="manage-section" id="manage-general">
-    <label class="standard-label">Group name:</label>
-    <span class="standard-input">@Model.Name</span>
-    <br/>
-    <label class="standard-label">Description:</label>
-    <span class="standard-input">@Model.Description</span>
-</section>
-
-<p>
-    <div id="buttons">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Cancel", "Index")
+    <div>
+        <h5>Group details</h5><hr />
     </div>
-</p>
+    <div class="row">
+        <h6><div class="col-sm-2">Group name:</div></h6>
+        <div class="col-sm-2">@Model.Name</div>
+    </div>
+    <div class="row">
+        <h6>
+            <div class="col-sm-2">Description:</div>
+        </h6>
+        <div class="col-sm-8">@Model.Description</div>
+    </div>
+
+    <div class="button-set">
+        @Html.ActionLink("Edit", "Edit", new {@id = Model.Id}, new { @class = "btn btn-primary", @role = "button" })
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary", @role = "button" })
+    </div>
+</section>

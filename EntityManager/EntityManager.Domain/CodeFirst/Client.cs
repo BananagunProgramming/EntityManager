@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EntityManager.Domain.CodeFirst
@@ -21,6 +23,6 @@ namespace EntityManager.Domain.CodeFirst
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
         
-        public virtual Subgroup SubGroup { get; set; }
+        public virtual ICollection<Subgroup> SubGroups { get; set; }
     }
 }

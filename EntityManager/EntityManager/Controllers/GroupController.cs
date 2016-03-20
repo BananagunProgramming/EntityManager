@@ -3,8 +3,8 @@ using System.Linq;
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
+using EntityManager.Helpers;
 using EntityManager.Infrastructure;
-using EntityManager.Models.GroupSubgroup;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
@@ -44,7 +44,7 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Details(Guid id)
         {
-            var groupDetailModel = _groupQueryService.GetGroupModelById(id);
+            var groupDetailModel = _groupQueryService.GetGroupById(id);
 
             return View("Details", groupDetailModel);
         }
@@ -54,7 +54,7 @@ namespace EntityManager.Controllers
         {
             var group = _groupQueryService.GetGroupById(id);
 
-            var vm = new GroupModel
+            var vm = new Group
             {
                 Id = id,
                 Name = group.Name,
@@ -67,7 +67,7 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            var group = _groupQueryService.GetGroupModelById(id);
+            var group = _groupQueryService.GetGroupById(id);
 
             if (group == null)
             {
@@ -94,7 +94,7 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(GroupModel updateGroupModel)
+        public ActionResult Save(Group updateGroupModel)
         {
             if (!ModelState.IsValid)
             {

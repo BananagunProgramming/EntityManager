@@ -258,10 +258,12 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SubgroupController.cs" />
     <Compile Include="DatabaseContexts\EntityManagerDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TextUtils.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\ValidateAntiForgeryTokenOnControllerAttribute.cs" />
     <Compile Include="Migrations_AuthenticationContext\201503041701118_Initial.cs" />
@@ -281,11 +283,18 @@
     <Compile Include="Migrations_EntityManagerDbContext\201602020120563_Initial.Designer.cs">
       <DependentUpon>201602020120563_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201603191814310_ClientToSubgroup.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201603191814310_ClientToSubgroup.Designer.cs">
+      <DependentUpon>201603191814310_ClientToSubgroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201603192247292_AddDescriptionToSubgroup.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201603192247292_AddDescriptionToSubgroup.Designer.cs">
+      <DependentUpon>201603192247292_AddDescriptionToSubgroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
     <Compile Include="Models\Account\ManageViewModels.cs" />
-    <Compile Include="Models\GroupSubgroup\GroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClientCommandService.cs" />
     <Compile Include="Services\ClientQueryService.cs" />
@@ -293,6 +302,7 @@
     <Compile Include="Services\GroupQueryService.cs" />
     <Compile Include="Services\ServiceCommandBase.cs" />
     <Compile Include="Services\ServiceQueryBase.cs" />
+    <Compile Include="Services\SubgroupQueryService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -385,6 +395,8 @@
     <Content Include="Views\Exceptions\Exception500.cshtml" />
     <Content Include="Views\Group\Details.cshtml" />
     <Content Include="Views\Group\Delete.cshtml" />
+    <Content Include="Views\Subgroup\Index.cshtml" />
+    <Content Include="Views\Subgroup\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
@@ -416,6 +428,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201602020120563_Initial.resx">
       <DependentUpon>201602020120563_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201603191814310_ClientToSubgroup.resx">
+      <DependentUpon>201603191814310_ClientToSubgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201603192247292_AddDescriptionToSubgroup.resx">
+      <DependentUpon>201603192247292_AddDescriptionToSubgroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using EF.Implementation;
 using EntityManager.Domain.CodeFirst;
-using EntityManager.Models.GroupSubgroup;
 
 namespace EntityManager.Services
 {
@@ -31,7 +30,7 @@ namespace EntityManager.Services
             return input.Id;
         }
 
-        public void UpdateGroup(GroupModel input)
+        public void UpdateGroup(Group input)
         {
             var user = _userService.GetCurrentUser();
             var group = GetEntity<Group>(input.Id);
@@ -53,7 +52,7 @@ namespace EntityManager.Services
     public interface IGroupCommandService
     {
         Guid Create(Group group);
-        void UpdateGroup(GroupModel input);
+        void UpdateGroup(Group input);
         void DeleteGroup(Guid id);
     }
 }

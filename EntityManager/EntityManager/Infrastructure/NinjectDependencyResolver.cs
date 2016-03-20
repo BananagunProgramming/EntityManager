@@ -26,6 +26,7 @@ namespace EntityManager.Infrastructure
             _kernel.Bind<IUserService>().To<UserService>().WithConstructorArgument(dbContextScopeFactory);
             _kernel.Bind<IGroupQueryService>().To<GroupQueryService>().WithConstructorArgument(dbContextScopeFactory);
             _kernel.Bind<IGroupCommandService>().To<GroupCommandService>().WithConstructorArgument(dbContextScopeFactory);
+            _kernel.Bind<ISubgroupQueryService>().To<SubgroupQueryService>().WithConstructorArgument(dbContextScopeFactory);
         }
 
         public object GetService(Type serviceType)

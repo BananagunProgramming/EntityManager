@@ -1,0 +1,37 @@
+﻿@model EntityManager.Domain.CodeFirst.Subgroup
+
+@{
+    ViewBag.Title = "Subgroup details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="manage-section">
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div>
+        <h5>Subgroup details</h5><hr />
+    </div>
+
+    <div class="row">
+        <h6><div class="col-sm-2">Subgroup name:</div></h6>
+        <div class="col-sm-8">@Model.Name</div>
+    </div>
+    <div class="row">
+        <h6><div class="col-sm-2">Description:</div></h6>
+        <div class="col-sm-8">@Model.Description</div>
+    </div>
+    <div class="row">
+        <h6><div class="col-sm-2">Last modified:</div></h6>
+        <div class="col-sm-8">@Model.LastUpdateDate</div>
+    </div>
+    <div class="row">
+        <h6><div class="col-sm-2">Modified by:</div></h6>
+        <div class="col-sm-8">@Model.LastUpdatedBy</div>
+    </div>
+
+    <div class="button-set">
+        @Html.ActionLink("Edit", "Edit", new { @id = Model.Id }, new { @class = "btn btn-primary", @role = "button" })
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary", @role = "button" })
+    </div>
+</section>

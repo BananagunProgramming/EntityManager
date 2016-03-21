@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EntityManager.Domain.CodeFirst.Subgroup>
+﻿@using EntityManager.Helpers
+@model IEnumerable<EntityManager.Domain.CodeFirst.Subgroup>
 
 @{
     ViewBag.Title = "Subgroup management";
@@ -8,7 +9,7 @@
 <h5>Subgroup management</h5><hr/>
 
 <p>
-    @Html.ActionLink("New subgroup", "Create", null, new {@class = "btn btn-success", @role = "button"})
+    @Html.ActionLink("New", "Create", null, new {@class = "btn btn-success", @role = "button"})
 </p>
 
 <table class="table">
@@ -28,7 +29,7 @@
             @Html.ActionLink(item.Name, "Details", new { id = item.Id })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.Truncate(item.Description, 35)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

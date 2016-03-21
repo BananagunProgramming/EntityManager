@@ -4,6 +4,13 @@ using EntityManager.Domain.CodeFirst;
 
 namespace EntityManager.Services
 {
+    public interface IGroupCommandService
+    {
+        Guid Create(Group group);
+        void UpdateGroup(Group input);
+        void DeleteGroup(Guid id);
+    }
+
     public class GroupCommandService : ServiceCommandBase, IGroupCommandService
     {
         private readonly IUserService _userService;
@@ -25,7 +32,7 @@ namespace EntityManager.Services
 
             CreateEntity(input);
 
-            AuditLog.Audit(String.Format("GroupCommandService - Group: {0} - User: {1} - {2}", input.Name, user.Identity.Name, DateTime.Now));
+            AuditLog.Audit($"GroupCommandService - Group: {input.Name} - User: {user.Identity.Name} - {DateTime.Now}");
 
             return input.Id;
         }
@@ -47,12 +54,5 @@ namespace EntityManager.Services
         {
             DeleteEntity<Group>(id);
         }
-    }
-
-    public interface IGroupCommandService
-    {
-        Guid Create(Group group);
-        void UpdateGroup(Group input);
-        void DeleteGroup(Guid id);
     }
 }

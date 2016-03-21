@@ -26,7 +26,7 @@ namespace EntityManager.Controllers
             _groupCommandService = groupCommandService;
         }
 
-        #region GETs
+        //GET: group
         [HttpGet]
         public ActionResult Index()
         {
@@ -76,9 +76,8 @@ namespace EntityManager.Controllers
 
             return View(group);
         }
-        #endregion
 
-        #region POSTs
+        //POST: group
         [HttpPost]
         public ActionResult Create(Group model)
         {
@@ -90,23 +89,23 @@ namespace EntityManager.Controllers
 
             var id = _groupCommandService.Create(model);
 
-            return RedirectToAction("Details", new { @id = id });
+            return RedirectToAction("Details", new { id });
         }
 
         [HttpPost]
-        public ActionResult Save(Group updateGroupModel)
+        public ActionResult Save(Group model)
         {
             if (!ModelState.IsValid)
             {
-                return View("Edit", updateGroupModel);
+                return View("Edit", model);
             }
 
             if (ModelState.IsValid)
             {
-                _groupCommandService.UpdateGroup(updateGroupModel);
+                _groupCommandService.UpdateGroup(model);
             }
             
-            return RedirectToAction("Details", new {@id = updateGroupModel.Id});
+            return RedirectToAction("Details", new {@id = model.Id});
         }
 
         [HttpPost, ActionName("Delete")]
@@ -116,7 +115,5 @@ namespace EntityManager.Controllers
 
             return RedirectToAction("Index");
         }
-
-        #endregion
     }
 }

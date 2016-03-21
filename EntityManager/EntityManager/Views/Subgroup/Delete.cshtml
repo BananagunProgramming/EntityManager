@@ -1,0 +1,38 @@
+﻿@model EntityManager.Domain.CodeFirst.Subgroup
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Delete", "SubGroup", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <section class="manage-section" id="edit">
+        <div>
+            <h5>Delete subgroup</h5><hr/>
+        </div>
+
+        <p><h4>Are you sure you want to delete this subgroup?</h4>
+        </p>
+
+        <div class="row">
+            <h6>
+                <div class="col-sm-2">Subgroup name:</div>
+            </h6>
+            <div class="col-sm-2">@Model.Name</div>
+        </div>
+        <div class="row">
+            <h6>
+                <div class="col-sm-2">Description:</div>
+            </h6>
+            <div class="col-sm-8">@Model.Description</div>
+        </div>
+        <div class="button-set">
+            <input type="submit" value="Delete" class="btn btn-success"/>
+            @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-secondary", @role = "button"})
+        </div>
+    </section>
+}

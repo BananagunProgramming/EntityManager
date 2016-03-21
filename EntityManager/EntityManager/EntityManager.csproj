@@ -302,6 +302,7 @@
     <Compile Include="Services\GroupQueryService.cs" />
     <Compile Include="Services\ServiceCommandBase.cs" />
     <Compile Include="Services\ServiceQueryBase.cs" />
+    <Compile Include="Services\SubgroupCommandService.cs" />
     <Compile Include="Services\SubgroupQueryService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
@@ -397,6 +398,9 @@
     <Content Include="Views\Group\Delete.cshtml" />
     <Content Include="Views\Subgroup\Index.cshtml" />
     <Content Include="Views\Subgroup\Details.cshtml" />
+    <Content Include="Views\Subgroup\Create.cshtml" />
+    <Content Include="Views\Subgroup\Edit.cshtml" />
+    <Content Include="Views\Subgroup\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />

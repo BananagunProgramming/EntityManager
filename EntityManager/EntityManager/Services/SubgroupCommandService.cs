@@ -55,7 +55,7 @@ namespace EntityManager.Services
 
         public void DeleteSubgroup(Guid id)
         {
-            //authorization
+            //authorizationn
             DeleteEntity<Subgroup>(id);
         }
     }

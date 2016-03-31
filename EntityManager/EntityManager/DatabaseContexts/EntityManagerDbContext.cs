@@ -11,7 +11,10 @@ namespace EntityManager.DatabaseContexts
         public DbSet<Group> Groups { get; set; }
         public DbSet<Subgroup> SubGroups { get; set; }
 
-        public EntityManagerDbContext() : base("DefaultConnection") { }
+        public EntityManagerDbContext() : base("DefaultConnection")
+        {
+            Configuration.ProxyCreationEnabled = false;
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

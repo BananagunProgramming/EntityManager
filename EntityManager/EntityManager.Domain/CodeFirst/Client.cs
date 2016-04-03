@@ -22,7 +22,7 @@ namespace EntityManager.Domain.CodeFirst
         public string YearEndDate { get; set; }
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
-        
-        public virtual ICollection<Subgroup> SubGroups { get; set; }
+
+        public Subgroup Subgroup { get; set; }
     }
 }

@@ -291,6 +291,10 @@
     <Compile Include="Migrations_EntityManagerDbContext\201603192247292_AddDescriptionToSubgroup.Designer.cs">
       <DependentUpon>201603192247292_AddDescriptionToSubgroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\201604031722456_RemoveManyToManyClientToSubgroup.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201604031722456_RemoveManyToManyClientToSubgroup.Designer.cs">
+      <DependentUpon>201604031722456_RemoveManyToManyClientToSubgroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
@@ -300,8 +304,6 @@
     <Compile Include="Services\ClientQueryService.cs" />
     <Compile Include="Services\GroupCommandService.cs" />
     <Compile Include="Services\GroupQueryService.cs" />
-    <Compile Include="Services\ServiceCommandBase.cs" />
-    <Compile Include="Services\ServiceQueryBase.cs" />
     <Compile Include="Services\SubgroupCommandService.cs" />
     <Compile Include="Services\SubgroupQueryService.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -438,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_EntityManagerDbContext\201603192247292_AddDescriptionToSubgroup.resx">
       <DependentUpon>201603192247292_AddDescriptionToSubgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201604031722456_RemoveManyToManyClientToSubgroup.resx">
+      <DependentUpon>201604031722456_RemoveManyToManyClientToSubgroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

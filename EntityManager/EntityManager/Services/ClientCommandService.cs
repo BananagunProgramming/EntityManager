@@ -1,18 +1,28 @@
 ﻿
 using System;
+using System.Data.Entity.Migrations;
 using EF.Implementation;
+using EntityManager.DatabaseContexts;
 using EntityManager.Domain.CodeFirst;
+using EntityManager.Domain.Services;
 
 namespace EntityManager.Services
 {
-    public class ClientCommandService : ServiceCommandBase, IClientCommandService
+    public class ClientCommandService : IClientCommandService
     {
+        private readonly DbContextScopeFactory _dbContextScopeFactory;
+        public static readonly AzureWriter AuditLog = new AzureWriter();
         private readonly IUserService _userService;
+        private readonly IClientQueryService _clientQueryService;
 
-        public ClientCommandService(DbContextScopeFactory dbContextScopeFactory, 
-            IUserService userService) : base(dbContextScopeFactory)
+        public ClientCommandService(
+            DbContextScopeFactory dbContextScopeFactory, 
+            IUserService userService, 
+            IClientQueryService clientQueryService)
         {
+            _dbContextScopeFactory = dbContextScopeFactory;
             _userService = userService;
+            _clientQueryService = clientQueryService;
         }
 
         //put non generic methods here
@@ -25,13 +35,19 @@ namespace EntityManager.Services
             input.LastUpdateDate = DateTime.Now;
             input.LastUpdatedBy = user.Identity.Name;
 
-            CreateEntity(input);
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
+                dbContext.Set<Client>().Add(input);
+
+                dbContext.SaveChanges();
+            }
         }
 
         public void UpdateClient(Client input)
         {
             var user = _userService.GetCurrentUser();
-            var client = GetEntity<Client>(input.ClientId);
+            var client = _clientQueryService.GetClientById(input.ClientId);
 
             client.Name = input.Name;
             client.EntityCode = input.EntityCode;
@@ -49,12 +65,25 @@ namespace EntityManager.Services
             client.LastUpdateDate = DateTime.Now;
             client.LastUpdatedBy = user.Identity.Name;
 
-            UpdateEntity(client);
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
+
+                dbContext.Set<Client>().AddOrUpdate(client);
+                dbContext.SaveChanges();
+            }
         }
 
         public void DeleteClient(Guid id)
         {
-            DeleteEntity<Client>(id);
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
+                var entity = dbContext.Set<Client>().Find(id);
+                dbContext.Set<Client>().Remove(entity);
+
+                dbContext.SaveChanges();
+            }
         }
     }
 

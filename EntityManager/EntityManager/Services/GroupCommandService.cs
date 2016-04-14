@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using EF.Implementation;
 using EntityManager.DatabaseContexts;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
+using EntityManager.Models.Groups;
 
 namespace EntityManager.Services
 {
     public interface IGroupCommandService
     {
-        Guid Create(Group group);
-        void UpdateGroup(Group input);
+        Guid Create(Group model);
+        void UpdateGroup(GroupUpdateModel model);
         void DeleteGroup(Guid id);
+        void SetUserGroups(GroupUpdateModel model);
     }
 
     public class GroupCommandService : IGroupCommandService
@@ -21,46 +24,48 @@ namespace EntityManager.Services
 
         private readonly IUserService _userService;
         private readonly IGroupQueryService _groupQueryService;
+        private readonly ISubgroupQueryService _subgroupQueryService;
         
         public GroupCommandService(
             DbContextScopeFactory dbContextScopeFactory, 
             IUserService userService, 
-            IGroupQueryService groupQueryService)
+            IGroupQueryService groupQueryService, ISubgroupQueryService subgroupQueryService)
         {
             _userService = userService;
             _groupQueryService = groupQueryService;
+            _subgroupQueryService = subgroupQueryService;
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 
-        public Guid Create(Group input)
+        public Guid Create(Group model)
         {
             var user = _userService.GetCurrentUser();
 
-            input.Id = Guid.NewGuid();
-            input.LastUpdateDate = DateTime.Now;
-            input.LastUpdatedBy = user.Identity.Name;
-            input.IsDeleted = false;
+            model.Id = Guid.NewGuid();
+            model.LastUpdateDate = DateTime.Now;
+            model.LastUpdatedBy = user.Identity.Name;
+            model.IsDeleted = false;
 
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
-                dbContext.Set<Group>().Add(input);
+                dbContext.Set<Group>().Add(model);
 
                 dbContext.SaveChanges();
             }
 
-            AuditLog.Audit($"GroupCommandService - Group: {input.Name} - User: {user.Identity.Name} - {DateTime.Now}");
+            AuditLog.Audit($"GroupCommandService - Group: {model.Name} - User: {user.Identity.Name} - {DateTime.Now}");
 
-            return input.Id;
+            return model.Id;
         }
 
-        public void UpdateGroup(Group input)
+        public void UpdateGroup(GroupUpdateModel input)
         {
             var user = _userService.GetCurrentUser();
-            var group = _groupQueryService.GetGroupById(input.Id);
+            var group = _groupQueryService.GetGroup(input.Group.Id);
 
-            group.Name = input.Name;
-            group.Description = input.Description;
+            group.Name = input.Group.Name;
+            group.Description = input.Group.Description;
             group.LastUpdateDate = DateTime.Now;
             group.LastUpdatedBy = user.Identity.Name;
 
@@ -81,6 +86,28 @@ namespace EntityManager.Services
                 var entity = dbContext.Set<Group>().Find(id);
                 dbContext.Set<Group>().Remove(entity);
 
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void SetUserGroups(GroupUpdateModel model)
+        {
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
+
+                var group = _groupQueryService.GetGroup(model.Group.Id);
+                var subgroups = _subgroupQueryService.GetAllSubgroups().Where(x => model.SubgroupId.Contains(x.Id));
+
+                group.SubGroups.Clear();
+
+                if (model.SubgroupId.Any())
+                {
+                    foreach (var subgroup in subgroups)
+                    {
+                        group.SubGroups.Add(subgroup);
+                    }
+                }
                 dbContext.SaveChanges();
             }
         }

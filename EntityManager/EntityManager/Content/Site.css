@@ -19,7 +19,7 @@ input, select {
     max-width: 450px;
 }
 textarea {
-    max-width: 50%;
+    max-width: 65%;
 }
 
 h6 {
@@ -87,7 +87,8 @@ h6 {
 }
 
 hr {
-    margin-bottom: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
 /*error*/
 .field-validation-error {

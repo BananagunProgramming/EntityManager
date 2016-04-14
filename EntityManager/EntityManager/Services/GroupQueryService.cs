@@ -13,7 +13,7 @@ namespace EntityManager.Services
     public interface IGroupQueryService
     {
         IEnumerable<Group> GetAllGroups();
-        Group GetGroupById(Guid id);
+        Group GetGroup(Guid id);
     }
 
     public class GroupQueryService : IGroupQueryService
@@ -38,17 +38,15 @@ namespace EntityManager.Services
             }
         }
 
-        public Group GetGroupById(Guid id)
+        public Group GetGroup(Guid id)
         {
             //authorizaton
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var result = dbContext.Set<Group>().Where(x => x.Id == id).Include("Subgroups").First();
-
-                //AuditLog.Audit(typeof(T).ToString());
-
+                var result = dbContext.Set<Group>().Where(x => x.Id == id).Include("Subgroups").FirstOrDefault();
+                
                 return result;
             }
         }

@@ -14,6 +14,7 @@ namespace EntityManager.Services
     {
         IEnumerable<Subgroup> GetAllSubgroups();
         Subgroup GetSubgroupById(Guid id);
+        List<Subgroup> MarkSelectedSubgroups(Group group);
     }
 
     public class SubgroupQueryService : ISubgroupQueryService
@@ -30,12 +31,11 @@ namespace EntityManager.Services
         public IEnumerable<Subgroup> GetAllSubgroups()
         {
             //authorization check
-            //return GetAllEntities<Subgroup>().Where(x => x.IsDeleted == false).OrderBy(x => x.Name);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var results = dbContext.Set<Subgroup>().ToList();//.Include("Group").ToList();
+                var results = dbContext.Set<Subgroup>().ToList();
 
                 return results;
             }
@@ -54,6 +54,23 @@ namespace EntityManager.Services
 
                 return result;
             }
+        }
+
+        public List<Subgroup> MarkSelectedSubgroups(Group group)
+        {
+            var subgroups = GetAllSubgroups().ToList();
+            foreach (var sg in subgroups)
+            {
+                foreach (var gsg in group.SubGroups)
+                {
+                    if (sg.Id == gsg.Id)
+                    {
+                        sg.IsChecked = true;
+                    }
+                }
+            }
+
+            return subgroups;
         }
     }
 }

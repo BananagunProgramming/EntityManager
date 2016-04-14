@@ -5,6 +5,7 @@ using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
 using EntityManager.Helpers;
 using EntityManager.Infrastructure;
+using EntityManager.Models.Groups;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
@@ -18,12 +19,16 @@ namespace EntityManager.Controllers
 
         private readonly IGroupQueryService _groupQueryService;
         private readonly IGroupCommandService _groupCommandService;
+        private readonly ISubgroupQueryService _subgroupQueryService;
 
-        public GroupController(IGroupQueryService groupQueryService, 
-            IGroupCommandService groupCommandService)
+        public GroupController(
+            IGroupQueryService groupQueryService, 
+            IGroupCommandService groupCommandService, 
+            ISubgroupQueryService subgroupQueryService)
         {
             _groupQueryService = groupQueryService;
             _groupCommandService = groupCommandService;
+            _subgroupQueryService = subgroupQueryService;
         }
 
         //GET: group
@@ -44,21 +49,21 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Details(Guid id)
         {
-            var groupDetailModel = _groupQueryService.GetGroupById(id);
+            var group = _groupQueryService.GetGroup(id);
 
-            return View("Details", groupDetailModel);
+            return View("Details", group);
         }
 
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var group = _groupQueryService.GetGroupById(id);
+            var group = _groupQueryService.GetGroup(id);
+            var subgroups = _subgroupQueryService.MarkSelectedSubgroups(group);
 
-            var vm = new Group
+            var vm = new GroupUpdateModel
             {
-                Id = id,
-                Name = group.Name,
-                Description = group.Description
+                Group = group,
+                Subgroups = subgroups
             };
 
             return View(vm);
@@ -67,7 +72,7 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            var group = _groupQueryService.GetGroupById(id);
+            var group = _groupQueryService.GetGroup(id);
 
             if (group == null)
             {
@@ -93,19 +98,20 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Group model)
+        public ActionResult Save(GroupUpdateModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Edit", model);
+            //}
 
             if (ModelState.IsValid)
             {
                 _groupCommandService.UpdateGroup(model);
+                _groupCommandService.SetUserGroups(model);
             }
             
-            return RedirectToAction("Details", new {@id = model.Id});
+            return RedirectToAction("Details", new {@id = model.Group.Id});
         }
 
         [HttpPost, ActionName("Delete")]

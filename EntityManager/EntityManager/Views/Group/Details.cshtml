@@ -14,18 +14,22 @@
     </div>
     <div class="row">
         <h6><div class="col-sm-2">Group name:</div></h6>
-        <div class="col-sm-2">@Model.Name</div>
+        <div class="col-sm-8">@Model.Name</div>
     </div>
     <div class="row">
         <h6><div class="col-sm-2">Description:</div></h6>
         <div class="col-sm-8">@Model.Description</div>
     </div>
-
+    
+    @if (Model.SubGroups.Any())
+    {
+        <hr />
         <h6>Associated subgroups</h6>
+    }
+        
         @foreach (var item in Model.SubGroups)
         {
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">@item.Name</div><br/>
+            @item.Name<br/>
         }
 
     <div class="button-set">

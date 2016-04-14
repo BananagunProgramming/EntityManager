@@ -30,11 +30,13 @@
         appInsights.trackPageView();
     </script>
 
-    @Styles.Render("~/Content/Layout.css")
-    @Styles.Render("~/Content/Navigation.css")
-
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
 
+    @Styles.Render("~/Content/Layout.css")
+    @Styles.Render("~/Content/Navigation.css")
+    @Scripts.Render("~/bundles/entitymanager/layout")
 </head>
 
 <body class="theme-body-background layout">
@@ -111,10 +113,6 @@
     @*<script type="text/javascript">
             document.getElementById("top").scrollIntoView();
         </script>*@
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/entitymanager/layout")
 
     @RenderSection("scripts", required: false)
     @RenderSection("page_javascript", required: false)

@@ -1,4 +1,4 @@
-﻿@model EntityManager.Domain.CodeFirst.Group
+﻿@model EntityManager.Models.Groups.GroupUpdateModel
 
 @{
     ViewBag.Title = "Edit group";
@@ -8,7 +8,7 @@
 @using (Html.BeginForm("Save", "Group", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Group.Id, Model.Group.Id)
 
     <section class="manage-section" id="edit">
         <div>
@@ -16,17 +16,55 @@
         </div>
         <div>
             <h6>Group name:</h6>
-            @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
-            <div>@Html.ValidationMessageFor(x => x.Name)</div>
+            @Html.TextBoxFor(model => model.Group.Name, new {@class = "form-control"})
+            <div>@Html.ValidationMessageFor(x => x.Group.Name)</div>
         </div>
         <div>
             <h6>Description:</h6>
-            @Html.TextAreaFor(model => model.Description, new { @rows = "5", @class = "form-control"})
-            <div>@Html.ValidationMessageFor(x => x.Description)</div>
+            @Html.TextAreaFor(model => model.Group.Description, new {@rows = "5", @class = "form-control"})
+            <div>@Html.ValidationMessageFor(x => x.Group.Description)</div>
         </div>
+
+        <section id="subgroup-summary">@*readonly*@
+            @if (Model.Group.SubGroups.Any())
+            {
+                <hr/>
+                <a class="edit-subgroups" href="#">Edit</a>
+                <h6>Associated subgroups</h6>
+            }
+            else
+            {
+                <hr />
+                <a class="edit-subgroups" href="#">Add</a>
+                <div>No subgroups yet</div>
+            }
+
+            @foreach (var item in Model.Group.SubGroups)
+            {
+                @item.Name<br/>
+            }
+        </section>
+
+        <section id="subgroup-manage" style="display: none">
+            <hr/>@*writeable*@
+            <a class="edit-subgroups" href="#">Cancel</a>
+            <h6>Choose subgroups</h6>
+
+            <fieldset>
+                @foreach (var item in Model.Subgroups)
+                {
+                    <input type="checkbox" name="SubgroupId" checked="@item.IsChecked" value="@item.Id"/>@item.Name<br/>
+                }
+
+                
+            </fieldset>
+        </section>
+
         <div class="button-set">
             <input type="submit" class="btn btn-success" value="Save">
-            @Html.ActionLink("Cancel", "Index", null, new { @class="btn btn-secondary", @role="button"})
+            @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-secondary", @role = "button"})
         </div>
     </section>
+
+    @Scripts.Render("~/bundles/groupmanagement")
 }

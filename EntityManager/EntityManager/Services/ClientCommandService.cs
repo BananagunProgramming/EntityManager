@@ -30,7 +30,7 @@ namespace EntityManager.Services
         {
             var user = _userService.GetCurrentUser();
 
-            input.ClientId = Guid.NewGuid();
+            input.Id = Guid.NewGuid();
             input.IsDeleted = false;
             input.LastUpdateDate = DateTime.Now;
             input.LastUpdatedBy = user.Identity.Name;
@@ -47,7 +47,7 @@ namespace EntityManager.Services
         public void UpdateClient(Client input)
         {
             var user = _userService.GetCurrentUser();
-            var client = _clientQueryService.GetClientById(input.ClientId);
+            var client = _clientQueryService.GetClientById(input.Id);
 
             client.Name = input.Name;
             client.EntityCode = input.EntityCode;

@@ -31,14 +31,11 @@ namespace EntityManager.Services
         public IEnumerable<Client> GetClientSpecificEntities()
         {
             //do some sort of authorization here
-            var entityCode = _userService.GetUserProperty("EntityCode");
 
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
-
-                var results = dbContext.Set<Client>().ToList();
-
+                var results = dbContext.Set<Client>().Include("Subgroup").OrderBy(x=>x.Name).ToList();
                 return results;
             }
         }
@@ -49,7 +46,7 @@ namespace EntityManager.Services
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var result = dbContext.Set<Client>().First(x => x.ClientId == id);
+                var result = dbContext.Set<Client>().First(x => x.Id == id);
 
                 //AuditLog.Audit(typeof(T).ToString());
 

@@ -1,113 +1,21 @@
 ﻿@model EntityManager.Domain.CodeFirst.Client
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Entity details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<section class="manage-section">
+    <div>
+        <h5>Entity details</h5><hr/>
+    </div>
 
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    @{
+        Html.RenderPartial("_Display", Model);
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EntityCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EntityCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YearIncorporated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YearIncorporated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TaxId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fax)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Website)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Website)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Schedule)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Schedule)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YearEndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YearEndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FiscalYearEndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FiscalYearEndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Managed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Managed)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <div class="button-set">
+        @Html.ActionLink("Edit", "Edit", new {@id = Model.Id}, new {@class = "btn btn-primary", @role = "button"})
+        @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-secondary", @role = "button"})
+    </div>
+</section>

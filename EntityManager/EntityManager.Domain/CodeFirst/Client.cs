@@ -7,7 +7,7 @@ namespace EntityManager.Domain.CodeFirst
 {
     public class Client : DomainBase
     {
-        public Guid ClientId { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

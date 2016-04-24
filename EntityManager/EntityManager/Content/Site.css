@@ -27,6 +27,13 @@ h6 {
     color: #686868;
 }
 
+.small-input-margin {
+    padding: 1px;
+}
+.row-buffer {
+    margin: 3px 0px 3px 0px;
+}
+
 /*inputs and labels*/
 .standard-label {
     display: block;

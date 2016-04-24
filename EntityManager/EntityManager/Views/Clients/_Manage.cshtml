@@ -1,0 +1,95 @@
+﻿@model EntityManager.Domain.CodeFirst.Client
+
+<div class="control-label col-sm-3">
+    <h6>Name</h6>
+</div>
+<div class="col-sm-9 small-input-margin small-input-margin">
+    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Code</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.EntityCode, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.EntityCode, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Year incorporated</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.YearIncorporated, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.YearIncorporated, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>TaxId</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.TaxId, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.TaxId, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Phone</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Fax</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Email</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Website</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => Model.Website, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Schedule</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.Schedule, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Schedule, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Year end</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.YearEndDate, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.YearEndDate, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Fiscal end</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.FiscalYearEndDate, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.FiscalYearEndDate, "", new { @class = "text-danger" })
+</div>
+<div class="control-label col-sm-3">
+    <h6>Managed</h6>
+</div>
+<div class="col-sm-9 small-input-margin">
+    @Html.EditorFor(model => model.Managed, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Managed, "", new { @class = "text-danger" })
+</div>
+
+@*buttons*@
+<div class="col-sm-3"></div>
+<div class="col-sm-9 small-input-margin">
+    <div class="button-set">
+        <input type="submit" class="btn btn-success" value="Save">
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary", @role = "button" })
+    </div>
+</div>

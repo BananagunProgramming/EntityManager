@@ -1,105 +1,57 @@
 ﻿@model IEnumerable<EntityManager.Domain.CodeFirst.Client>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Entity management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@*client*@
+<h5>Entity manager</h5><hr />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("New", "Create", null, new { @class = "btn btn-success", @role = "button" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EntityCode)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.YearIncorporated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaxId)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Schedule)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.YearEndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FiscalYearEndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Managed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>*@
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EntityCode)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.YearIncorporated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaxId)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Schedule)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YearEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FiscalYearEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Managed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
-        </td>
-    </tr>
-}
-
-</table>
+<section>
+    <div class="col-sm-9">
+        <div class="col-sm-5">
+            <h6>Entity</h6>
+        </div>
+        <div class="col-sm-2">
+            <h6>Code</h6>
+        </div>
+        <div class="col-sm-2">
+            <h6>Subgroup</h6>
+        </div>
+        <div class="col-sm-3">
+            <h6>Phone</h6>
+        </div>    
+    </div>
+    <div class="col-sm-3">
+        <div class="col-sm-12">
+            <h6>Actions</h6>
+        </div>
+    </div>
+   
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-9 row-buffer">
+                <div class="col-sm-5 row-buffer">
+                    @Html.ActionLink(item.Name, "Details", new { id = item.Id})
+                </div>
+                <div class="col-sm-2 row-buffer">
+                    @Html.DisplayFor(modelItem => item.EntityCode)
+                </div>
+                <div class="col-sm-2 row-buffer">
+                    @Html.DisplayFor(modelItem => item.Subgroup.Name)
+                </div>
+                <div class="col-sm-3 row-buffer">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </div>
+            </div>
+            <div class="col-sm-3 row-buffer">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+        }
+</section>

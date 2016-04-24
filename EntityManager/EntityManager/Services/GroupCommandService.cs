@@ -101,7 +101,7 @@ namespace EntityManager.Services
 
                 group.SubGroups.Clear();
 
-                if (model.SubgroupId.Any())
+                if (model.SubgroupId != null)
                 {
                     foreach (var subgroup in subgroups)
                     {

@@ -48,9 +48,7 @@ namespace EntityManager.Services
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var result = dbContext.Set<Subgroup>().First(x => x.Id == id);
-
-                //AuditLog.Audit(typeof(T).ToString());
+                var result = dbContext.Set<Subgroup>().Include("Group").Include("Clients").First(x => x.Id == id);
 
                 return result;
             }

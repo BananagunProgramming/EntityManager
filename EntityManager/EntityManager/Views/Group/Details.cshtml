@@ -21,6 +21,16 @@
         <div class="col-sm-8">@Model.Description</div>
     </div>
     
+    <div class="row">
+        <h6><div class="col-sm-2">Belongs to:</div></h6>
+        <div class="col-sm-8">@Model.LastUpdateDate</div>
+    </div>
+    <div class="row">
+        <h6>
+            <div class="col-sm-2">Modified by:</div></h6>
+        <div class="col-sm-8">@Model.LastUpdatedBy</div>
+    </div>
+
     @if (Model.SubGroups.Any())
     {
         <hr />

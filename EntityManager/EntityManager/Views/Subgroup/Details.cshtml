@@ -18,8 +18,20 @@
         <div class="col-sm-8">@Model.Name</div>
     </div>
     <div class="row">
-        <h6><div class="col-sm-2">Description:</div></h6>
+        <h6>
+            <div class="col-sm-2">Description:</div>
+        </h6>
         <div class="col-sm-8">@Model.Description</div>
+    </div>
+    <div class="row">
+        <h6>
+            <div class="col-sm-2">Parent group:</div>
+        </h6>
+        <div class="col-sm-8">@Model.Group.Name</div>
+    </div>
+    <div class="row">
+        <h6><div class="col-sm-2">Entities:</div></h6>
+        <div class="col-sm-8">@string.Join(", ", @Model.Clients.Select(x => x.Name))</div>
     </div>
     <div class="row">
         <h6><div class="col-sm-2">Last modified:</div></h6>

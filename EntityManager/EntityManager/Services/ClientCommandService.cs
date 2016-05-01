@@ -61,6 +61,7 @@ namespace EntityManager.Services
             client.YearEndDate = input.YearEndDate;
             client.FiscalYearEndDate = input.FiscalYearEndDate;
             client.Managed = input.Managed;
+            client.SubgroupId = input.SubgroupId;
 
             client.LastUpdateDate = DateTime.Now;
             client.LastUpdatedBy = user.Identity.Name;

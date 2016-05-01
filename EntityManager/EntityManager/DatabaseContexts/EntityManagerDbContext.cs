@@ -13,6 +13,7 @@ namespace EntityManager.DatabaseContexts
 
         public EntityManagerDbContext() : base("DefaultConnection")
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<EntityManagerDbContext>());
             Configuration.ProxyCreationEnabled = false;
         }
 

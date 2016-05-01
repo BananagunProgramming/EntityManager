@@ -22,6 +22,7 @@ namespace EntityManager.Domain.CodeFirst
         public string YearEndDate { get; set; }
         public string FiscalYearEndDate { get; set; }
         public string Managed { get; set; }
+        public Guid SubgroupId { get; set; }
 
         public Subgroup Subgroup { get; set; }
     }

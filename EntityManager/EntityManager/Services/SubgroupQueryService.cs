@@ -35,7 +35,7 @@ namespace EntityManager.Services
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var results = dbContext.Set<Subgroup>().ToList();
+                var results = dbContext.Set<Subgroup>().Where(x => x.IsDeleted == false).ToList();
 
                 return results;
             }

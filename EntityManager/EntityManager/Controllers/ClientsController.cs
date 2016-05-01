@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using EntityManager.Domain.CodeFirst;
 using EntityManager.Domain.Services;
 using EntityManager.Infrastructure;
+using EntityManager.Models.Client;
 using EntityManager.Services;
 
 namespace EntityManager.Controllers
@@ -15,13 +18,16 @@ namespace EntityManager.Controllers
 
         private readonly IClientQueryService _clientQueryService;
         private readonly IClientCommandService _clientCommandService;
+        private readonly ISubgroupQueryService _subgroupQueryService;
         
         public ClientsController(
             IClientQueryService clientQueryService, 
-            IClientCommandService clientCommandService)
+            IClientCommandService clientCommandService, 
+            ISubgroupQueryService subgroupQueryService)
         {
             _clientQueryService = clientQueryService;
             _clientCommandService = clientCommandService;
+            _subgroupQueryService = subgroupQueryService;
         }
 
         [HttpGet]
@@ -46,7 +52,11 @@ namespace EntityManager.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var newClient = new ClientManageModel
+            {
+                Subgroups = _subgroupQueryService.GetAllSubgroups()
+            };
+            return View(newClient);
         }
 
         [HttpGet]
@@ -70,15 +80,51 @@ namespace EntityManager.Controllers
             {
                 return HttpNotFound();
             }
-            return View(client);
+
+            var model = new ClientManageModel
+            {
+                Name = client.Name,
+                EntityCode = client.EntityCode,
+                YearIncorporated = client.YearIncorporated,
+                TaxId = client.TaxId,
+                Phone = client.Phone,
+                Fax = client.Fax,
+                Email = client.Email,
+                Website = client.Website,
+                Schedule = client.Schedule,
+                YearEndDate = client.YearEndDate,
+                FiscalYearEndDate = client.FiscalYearEndDate,
+                Managed = client.Managed,
+                SubgroupId = client.SubgroupId,
+                Subgroups = _subgroupQueryService.GetAllSubgroups()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed")] Client client)
+        public ActionResult Create(ClientManageModel client)
         {
             if (ModelState.IsValid)
             {
-                _clientCommandService.CreateClient(client);
+                var model = new Client
+                {
+                    Name = client.Name,
+                    EntityCode = client.EntityCode,
+                    YearIncorporated = client.YearIncorporated,
+                    TaxId = client.TaxId,
+                    Phone = client.Phone,
+                    Fax = client.Fax,
+                    Email = client.Email,
+                    Website = client.Website,
+                    Schedule = client.Schedule,
+                    YearEndDate = client.YearEndDate,
+                    FiscalYearEndDate = client.FiscalYearEndDate,
+                    Managed = client.Managed,
+                    SubgroupId = client.SubgroupId
+                };
+                
+                _clientCommandService.CreateClient(model);
 
                 return RedirectToAction("Index");
             }
@@ -87,7 +133,7 @@ namespace EntityManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,EntityCode,YearIncorporated,TaxId,Phone,Fax,Email,Website,Schedule,YearEndDate,FiscalYearEndDate,Managed,CreatedDate")] Client client)
+        public ActionResult Edit(Client client)
         {
             if (ModelState.IsValid)
             {

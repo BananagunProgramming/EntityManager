@@ -17,10 +17,10 @@
         <div class="col-sm-5">
             <h6>Entity</h6>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-1">
             <h6>Code</h6>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <h6>Subgroup</h6>
         </div>
         <div class="col-sm-3">
@@ -39,10 +39,10 @@
                 <div class="col-sm-5 row-buffer">
                     @Html.ActionLink(item.Name, "Details", new { id = item.Id})
                 </div>
-                <div class="col-sm-2 row-buffer">
+                <div class="col-sm-1 row-buffer">
                     @Html.DisplayFor(modelItem => item.EntityCode)
                 </div>
-                <div class="col-sm-2 row-buffer">
+                <div class="col-sm-3 row-buffer">
                     @Html.DisplayFor(modelItem => item.Subgroup.Name)
                 </div>
                 <div class="col-sm-3 row-buffer">

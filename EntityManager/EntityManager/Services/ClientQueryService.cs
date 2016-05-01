@@ -18,14 +18,11 @@ namespace EntityManager.Services
     {
         private readonly DbContextScopeFactory _dbContextScopeFactory;
         public static readonly AzureWriter AuditLog = new AzureWriter();
-        private readonly IUserService _userService;
 
         public ClientQueryService(
-            DbContextScopeFactory dbContextScopeFactory, 
-            IUserService userService)
+            DbContextScopeFactory dbContextScopeFactory)
         {
             _dbContextScopeFactory = dbContextScopeFactory;
-            _userService = userService;
         }
 
         public IEnumerable<Client> GetClientSpecificEntities()
@@ -46,7 +43,7 @@ namespace EntityManager.Services
             {
                 var dbContext = dbContextScope.DbContexts.Get<EntityManagerDbContext>();
 
-                var result = dbContext.Set<Client>().First(x => x.Id == id);
+                var result = dbContext.Set<Client>().Include("Subgroup").First(x => x.Id == id);
 
                 //AuditLog.Audit(typeof(T).ToString());
 

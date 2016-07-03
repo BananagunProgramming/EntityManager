@@ -3,26 +3,30 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using EntityManager.Models.Account;
+using EntityManager.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 namespace EntityManager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IUserService _userService;
 
-        public ManageController()
+        public ManageController(IUserService userService)
         {
+            _userService = userService;
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userService = userService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -52,6 +56,7 @@ namespace EntityManager.Controllers
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
+
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -69,8 +74,33 @@ namespace EntityManager.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Users = _userService.GetAllUsers(UserManager)
             };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "Manage");
+                }
+                AddErrors(result);
+            }
+
             return View(model);
         }
 

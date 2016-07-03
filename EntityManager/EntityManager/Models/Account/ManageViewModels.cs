@@ -12,6 +12,7 @@ namespace EntityManager.Models.Account
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public IList<ApplicationUser> Users { get; set; }
     }
 
     public class ManageLoginsViewModel

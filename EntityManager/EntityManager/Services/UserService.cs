@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Security.Claims;
+using System.Linq;
 using System.Security.Principal;
-using System.Threading;
 using System.Web;
 using EF.Implementation;
 using EntityManager.Models.Account;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EntityManager.Services
 {
     public interface IUserService
     {
         IPrincipal GetCurrentUser();
+        IList<ApplicationUser> GetAllUsers(ApplicationUserManager userManager);
+        ApplicationUser GetUserByName(ApplicationUserManager userManager, string userName);
     }
 
     public class UserService : IUserService
@@ -29,6 +29,18 @@ namespace EntityManager.Services
         public IPrincipal GetCurrentUser()
         {
             return _user;
+        }
+
+        public IList<ApplicationUser> GetAllUsers(ApplicationUserManager userManager)
+        {
+            return userManager.Users.OrderBy(x => x.Email).ToList();
+        }
+
+        public ApplicationUser GetUserByName(ApplicationUserManager userManager, string userName)
+        {
+            var user = userManager.FindByName(userName);
+
+            return user;
         }
     }
 }

@@ -3,7 +3,7 @@
 <div class="control-label col-sm-3">
     Name
 </div>
-<div class="col-sm-9 small-input-margin small-input-margin">
+<div class="col-sm-9 small-input-margin">
     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
 </div>

@@ -377,6 +377,8 @@
     <Content Include="Views\Subgroup\Delete.cshtml" />
     <Content Include="Views\Clients\_Manage.cshtml" />
     <Content Include="Views\Clients\_Display.cshtml" />
+    <Content Include="Views\Shared\_CreateLogin.cshtml" />
+    <Content Include="Views\Manage\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />

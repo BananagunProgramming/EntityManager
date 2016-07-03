@@ -1,0 +1,46 @@
+﻿@model EntityManager.Models.Account.RegisterViewModel
+
+@using (Html.BeginForm("Create", "Manage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <section class="manage-section">
+        <h5>Create user</h5><hr/>
+
+        <div class="control-label col-sm-3 small-input-margin">
+            Email
+        </div>
+        <div class="col-sm-9 small-input-margin">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+        </div>
+        <div class="control-label col-sm-3 small-input-margin">
+            Password
+        </div>
+        <div class="col-sm-9 small-input-margin">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="control-label col-sm-3 small-input-margin">
+            Confirm password
+        </div>
+        <div class="col-sm-9 small-input-margin">
+            @Html.TextBoxFor(m => m.ConfirmPassword, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})
+        </div>
+
+        @*buttons*@
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9 small-input-margin">
+            <div class="button-set">
+                <input type="submit" class="btn btn-success" value="Save">
+                @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-secondary", @role = "button"})
+            </div>
+        </div>
+
+    </section>
+}
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

@@ -10,6 +10,7 @@ using EntityManager.Services;
 
 namespace EntityManager.Controllers
 {
+    [Authorize(Roles = "admin")]
     [ValidateAntiForgeryTokenOnController(HttpVerbs.Post)]
     public class ClientsController : Controller
     {

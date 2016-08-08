@@ -279,6 +279,16 @@
     <Compile Include="Helpers\TextUtils.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\ValidateAntiForgeryTokenOnControllerAttribute.cs" />
+    <Compile Include="Migrations_AuthenticationContext\201608082234595_Initial.cs" />
+    <Compile Include="Migrations_AuthenticationContext\201608082234595_Initial.Designer.cs">
+      <DependentUpon>201608082234595_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_AuthenticationContext\Configuration.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201608082221542_Initial.cs" />
+    <Compile Include="Migrations_EntityManagerDbContext\201608082221542_Initial.Designer.cs">
+      <DependentUpon>201608082221542_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_EntityManagerDbContext\Configuration.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
     <Compile Include="Models\Account\ManageViewModels.cs" />
@@ -415,6 +425,14 @@
       <Project>{59fe4607-c579-42eb-83ce-fe91ac9616a6}</Project>
       <Name>EntityManager.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations_AuthenticationContext\201608082234595_Initial.resx">
+      <DependentUpon>201608082234595_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_EntityManagerDbContext\201608082221542_Initial.resx">
+      <DependentUpon>201608082221542_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
